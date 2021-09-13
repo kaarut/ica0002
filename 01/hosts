@@ -1,5 +1,1 @@
 myVM ansible_host=193.40.156.86 ansible_port=9722 ansible_ssh_user=ubuntu
-
-[web_servers]
-myVM
-
