@@ -3,6 +3,7 @@
     hosts: web_servers
     become: yes
     roles:
-      - add_users
-      - create_nginx
-      - landing_page
+      - users
+      - agma
+      - uwsgi
+      - nginx

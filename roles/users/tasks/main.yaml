@@ -1,19 +1,10 @@
-- name: Linux user Roman
+- name: Linux user agama
   ansible.builtin.user:
-    name: roman
+    name: agama
 
-- name: Linux user Juri
-  ansible.builtin.user:
-    name: juri
+- name: Dir for agama
+  file:
+   path: /opt/agama
+   state: directory 
+   owner: agama
 
-- name: Add ssh key for roman
-  ansible.posix.authorized_key:
-    user: roman
-    state: present
-    key: https://github.com/romankuchin.keys
-
-- name: Add ssh key for juri
-  ansible.posix.authorized_key:
-    user: juri
-    state: present
-    key: https://github.com/hudolejev.keys

@@ -1,0 +1,28 @@
+- name: Installing uwsgi-1
+  ansible.builtin.apt:
+    name: uwsgi-core
+    state: present
+
+- name: Installing uwsgi-2
+  ansible.builtin.apt:
+    name: uwsgi-plugin-python3
+    state: present
+
+- name: Start service uWSGI , if not started
+  ansible.builtin.service:
+    name: uwsgi
+    state: started
+
+# - name: Install Flask python package
+#   pip:
+#     name: Flask-SQLAlchemy
+
+# - name: Download the app
+#   get_url:
+#     url: https://raw.githubusercontent.com/hudolejev/agama/master/agama.py
+#     dest: /opt/agama
+    
+# - name: Start service uWSGI , if not started
+#   ansible.builtin.service:
+#     name: uWSGI 
+#     state: started
