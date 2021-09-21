@@ -1,5 +1,10 @@
-myVM ansible_host=193.40.156.86 ansible_port=9622 ansible_ssh_user=ubuntu
+SRV1 ansible_host=193.40.156.86 ansible_port=9622 ansible_ssh_user=ubuntu
+SRV2 ansible_host=193.40.156.86 ansible_port=2822 ansible_ssh_user=ubuntu
+
 
 [web_servers]
-myVM
+SRV1
+
+[db_servers]
+SRV2
 
