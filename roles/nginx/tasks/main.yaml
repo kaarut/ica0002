@@ -6,7 +6,7 @@
     
 - name: Replace the default Nginx conf file
   ansible.builtin.copy:
-    src: ../files/default
+    src: default
     dest: /etc/nginx/sites-enabled/default
   notify: restart nginx
 
@@ -14,4 +14,5 @@
   service:
     name: nginx
     state: started
+    enabled: yes
   become: yes

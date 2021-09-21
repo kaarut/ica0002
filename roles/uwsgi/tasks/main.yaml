@@ -1,24 +1,23 @@
-- name: Installing uwsgi-1
-  ansible.builtin.apt:
-    name: uwsgi
-    state: present
-
-- name: Installing uwsgi-2
-  ansible.builtin.apt:
-    name: uwsgi-plugin-python3
-    state: present
+- name: Install uwsgi packages
+  apt:
+    pkg:
+    - uwsgi
+    - uwsgi-plugin-python3
+    - python3-pymysql
 
 - name: Copy ini file
   ansible.builtin.copy:
-    src: ../files/agama.ini
-    dest: /etc/uwsgi/apps-enabled/
+    src: agama.ini
+    dest: /etc/uwsgi/apps-enabled/agama.ini
     owner: agama
+    mode: 0644
   notify: restart uwsgi
 
 - name: Start service uWSGI , if not started
   ansible.builtin.service:
     name: uwsgi
     state: started
+    enabled: yes
     
     
 # - name: Restart after config change
