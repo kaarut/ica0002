@@ -5,7 +5,7 @@
     - uwsgi-plugin-python3
 
 - name: Copy ini file
-  ansible.builtin.copy:
+  ansible.builtin.template:
     src: ../templates/agama.ini
     dest: /etc/uwsgi/apps-enabled/agama.ini
     owner: agama
