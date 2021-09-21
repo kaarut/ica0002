@@ -1,6 +1,6 @@
 - name: Installing uwsgi-1
   ansible.builtin.apt:
-    name: uwsgi-core
+    name: uwsgi
     state: present
 
 - name: Installing uwsgi-2
@@ -8,10 +8,32 @@
     name: uwsgi-plugin-python3
     state: present
 
+- name: Copy ini file
+  ansible.builtin.copy:
+    src: ../files/agama.ini
+    dest: /etc/uwsgi/apps-enabled/
+    owner: agama
+  notify: restart uwsgi
+
 - name: Start service uWSGI , if not started
   ansible.builtin.service:
     name: uwsgi
     state: started
+    
+    
+# - name: Restart after config change
+#   ansible.builtin.template:
+#     src: ./agama.ini
+#     dest: /etc/uwsgi/apps-enabled/
+#   notify:
+#   -  Restart uwsgi
+
+#   handlers:
+#     - name: Restart uwsgi
+#       ansible.builtin.service:
+#         name: uwsgi
+#         state: restarted
+
 
 # - name: Install Flask python package
 #   pip:

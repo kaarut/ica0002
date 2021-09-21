@@ -4,6 +4,6 @@
     become: yes
     roles:
       - users
-      - agma
+      - agama
       - uwsgi
       - nginx

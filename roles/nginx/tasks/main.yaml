@@ -4,4 +4,14 @@
     state: present
     update_cache: yes
     
+- name: Replace the default Nginx conf file
+  ansible.builtin.copy:
+    src: ../files/default
+    dest: /etc/nginx/sites-enabled/default
+  notify: restart nginx
 
+- name: start nginx
+  service:
+    name: nginx
+    state: started
+  become: yes
