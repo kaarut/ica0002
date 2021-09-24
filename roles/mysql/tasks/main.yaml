@@ -1,10 +1,10 @@
 - name: Install MYSQL-server
   ansible.builtin.apt:
-    name: 
+    pkg: 
     - mysql-server
     - python3-pymysql
 
-- name: Replace the default Nginx conf file
+- name: Replace the default mysql conf file
   ansible.builtin.copy:
     src: override.cnf
     dest: /etc/mysql/mysql.conf.d/override.cnf
@@ -30,4 +30,3 @@
     password: "{{ mysql_password }}"
     priv: "{{ mysql_database }}.*:ALL"
     login_unix_socket: /var/run/mysqld/mysqld.sock
-    
