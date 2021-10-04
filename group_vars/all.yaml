@@ -1,4 +1,6 @@
-mysql_host: 192.168.42.98
+domain: lads
+zone: kr
+mysql_host: 192.168.42.132
 mysql_database: agama
 mysql_user: agama
 mysql_password: !vault |

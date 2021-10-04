@@ -1,0 +1,13 @@
+---
+- name: Setup
+  hosts: all
+  become: yes
+  gather_facts: yes
+  tasks:
+    - setup:
+
+- name: Init
+  hosts: db_servers
+  become: yes
+  roles: 
+    - bind

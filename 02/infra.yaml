@@ -1,8 +1,0 @@
----
-  - name: Ansible all web servers
-    hosts: web_servers
-    become: yes
-    roles:
-      - add_users
-      - create_nginx
-      - landing_page
