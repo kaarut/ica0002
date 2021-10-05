@@ -1,6 +1,7 @@
 domain: lads
 zone: kr
-mysql_host: 192.168.42.132
+fqdn: lads.kr
+mysql_host: srv2
 mysql_database: agama
 mysql_user: agama
 mysql_password: !vault |
@@ -10,3 +11,5 @@ mysql_password: !vault |
           64346164313763336362383566333037306335666135393537326332306135313632663761313962
           3262393634306639610a326533633134316636336237376632653765316335656661373963626634
           3963
+
+

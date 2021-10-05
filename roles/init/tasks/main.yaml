@@ -1,3 +1,19 @@
 - name: Update APT cache
   ansible.builtin.apt:
     cache_valid_time: 86400
+
+- name: disable resolved.service
+  service:
+    name: systemd-resolved.service
+    state: stopped
+
+- name: Delete resolv.conf
+  ansible.builtin.file:
+    path: /etc/resolv.conf
+    follow: yes
+    state: absent
+
+- name: replace with new resolv file
+  template: 
+    src: resolv.conf.j2
+    dest: /etc/resolv.conf

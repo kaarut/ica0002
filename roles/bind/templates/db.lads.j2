@@ -1,14 +1,17 @@
 $TTL	604800
-{{ domain }}.{{ zone }}.	IN	SOA	vm1.{{ domain }}.{{ zone }}. kaarut.{{domain}}.{{zone}}. (
+{{ fqdn }}.	IN	SOA	{{ fqdn }}. kaarut.{{ fqdn }}. (
 			      2		; Serial
 			 604800		; Refresh
 			  86400		; Retry
 			2419200		; Expire
 			 604800 )	; Negative Cache TTL
 ;
-{{domain}}.{{zone}}.	IN	NS	vm1
 
-{}
+{% for vm in groups['dns_servers'] %}
+{{ fqdn }}.	IN	NS	{{ vm }}.{{ fqdn }}.
+{% endfor %}
 
-vm1	IN	A	192.168.42.166
-vm2	IN	A	192.168.42.170
+
+{% for vm in groups['all'] %} 
+{{ hostvars[vm]['inventory_hostname'] }}	IN	A	{{ hostvars[vm]['ansible_default_ipv4']['address'] }}
+{% endfor %}
