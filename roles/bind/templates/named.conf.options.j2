@@ -1,16 +1,17 @@
-acl lan { 192.168.42.0/24; 127.0.0.0/8; };
-
 options {
 	directory "/var/cache/bind";
 
 	forwarders {
-	1.1.1.1;
-        8.8.8.8;
-        9.9.9.9;
-        9.9.9.10;
-	 };
+    {% for ip in forwarders %} 
+            {{ ip }};
+    {% endfor %}
+	};
+
+	dnssec-validation no;
+
     allow-query { 
-        lan; 
+    {% for ip in acl %} 
+            {{ ip }};
+    {% endfor %}
     };
-	dnssec-validation auto;
 };

@@ -1,0 +1,12 @@
+---
+- name: Install APT package
+  apt:
+    name:
+    - prometheus-node-exporter
+
+- name: Enable node exporter
+  ansible.builtin.service:
+    name: prometheus-node-exporter
+    state: started
+    enabled: yes
+

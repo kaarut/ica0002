@@ -1,0 +1,13 @@
+---
+- name: Configure node_exporter
+  hosts: all
+  become: yes
+  roles: 
+    - node_exporter
+
+- name: SetUp prometheus
+  hosts: prometheus
+  become: yes
+  roles: 
+    - prometheus
+    

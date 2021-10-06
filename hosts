@@ -10,3 +10,6 @@ SRV2
 
 [dns_servers]
 SRV2
+
+[prometheus]
+SRV1
