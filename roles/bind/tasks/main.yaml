@@ -9,15 +9,15 @@
     src: named.conf.options.j2
     dest: /etc/bind/named.conf.options
   notify: restart bind
-
-- name: Installing the db
-  template: 
-    src: db.{{ domain }}.j2
-    dest: /var/cache/bind/db.{{ domain }}
-  notify: restart bind
-
+  
 - name: Installing the local
   template: 
     src: named.conf.local.j2
     dest: /etc/bind/named.conf.local
   notify: restart bind
+
+- name: Installing the db
+  template: 
+    src: db.{{ domain }}.j2
+    dest: /var/cache/bind/db.{{ domain }}
+  notify: reload rndc

@@ -11,16 +11,16 @@ server {
     {% endif %}
 
     # NODE EXPORTER
-    location /node_exporter
-            {
-                proxy_pass http://localhost:9100/metrics;
-            }
+    location /node-metrics
+        {
+            proxy_pass http://localhost:9100/metrics;
+        }
 
     # PROMETHEUS 
     {% if inventory_hostname in groups['prometheus'] %}
-            location /prometheus
-            {
-                proxy_pass http://localhost:9090;
-            }
+    location /prometheus
+        {
+            proxy_pass http://localhost:9090;
+        }
     {% endif %}
 }

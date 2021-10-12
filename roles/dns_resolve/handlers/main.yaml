@@ -1,0 +1,5 @@
+---
+- name: restart dns_resolve
+  service: 
+    name: systemd-resolved
+    state: restarted

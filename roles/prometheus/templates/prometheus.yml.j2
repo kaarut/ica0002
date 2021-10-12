@@ -18,5 +18,5 @@ scrape_configs:
     static_configs:
       - targets: 
         {% for vm in groups['all'] %} 
-        - {{ hostvars[vm]['inventory_hostname'] }}:9010
+        - {{ hostvars[vm]['inventory_hostname'] }}:9100
         {% endfor %}

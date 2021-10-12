@@ -4,21 +4,22 @@
     name:
     - prometheus
 
-- name: Enable prometheus
-  ansible.builtin.service:
-    name: prometheus
-    state: started
-    enabled: yes
-
 - name: Configure the template
   template: 
     src: prometheus.yml.j2
     dest: /etc/prometheus/prometheus.yml
-  notify: restart prometheus
-
+  notify: 
+    - restart prometheus
+    - restart nginx
 
 - name: Configure the prometheus config
   template: 
     src: prometheus.j2
     dest: /etc/default/prometheus
   notify: restart prometheus
+
+- name: start prometheus
+  ansible.builtin.service:
+    name: prometheus
+    state: started
+    enabled: yes
