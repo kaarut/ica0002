@@ -8,6 +8,12 @@ server {
             uwsgi_pass localhost:5000;
             include uwsgi_params;
         }
+    
+    # STUB
+    listen 8080 default_server;
+        location = /basic_status {
+                stub_status;
+        }   
     {% endif %}
 
     # NODE EXPORTER
@@ -16,6 +22,13 @@ server {
             proxy_pass http://localhost:9100/metrics;
         }
 
+    # DNS_exporter 
+    {% if inventory_hostname in groups['dns_servers'] %}
+        location /bind-metrics  {
+            proxy_pass localhost:8053;
+        }
+    {% endif %}
+
     # PROMETHEUS 
     {% if inventory_hostname in groups['prometheus'] %}
     location /prometheus
@@ -23,4 +36,5 @@ server {
             proxy_pass http://localhost:9090;
         }
     {% endif %}
+
 }

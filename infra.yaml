@@ -11,12 +11,7 @@
     become: yes
     roles: 
       - bind
-
-  - name: DNS resolve
-    hosts: all
-    become: yes
-    roles: 
-      - dns_resolve
+      - bind_exporter
     
   - name: Init
     hosts: all
@@ -24,11 +19,13 @@
     roles: 
       - init
     
-  - name: Database server
+  - name: MYSQL servers
     hosts: db_servers
     become: yes
+    gather_facts: no
     roles:
       - mysql
+      - mysql_exporter
   
   - name: Web server
     hosts: web_servers
@@ -44,10 +41,19 @@
     roles: 
       - node_exporter
       - nginx
+      - dns_resolve
 
-  - name: SetUp prometheus
+  - name: Prometheus
     hosts: prometheus
     become: yes
+    gather_facts: no
     roles: 
       - prometheus
     
+
+  - name: grafana
+    hosts: grafana
+    become: yes
+    gather_facts: no
+    roles: 
+      - grafana

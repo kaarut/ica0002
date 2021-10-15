@@ -2,6 +2,10 @@
   ansible.builtin.apt:
     cache_valid_time: 86400
 
+- name: hostname
+  hostname: 
+    name: "{{inventory_hostname}}"
+
 # - name: Debugging only
 #   debug:
 #     msg: "{{ hostvars[inventory_hostname ]['ansible_default_ipv4']['address']}}"

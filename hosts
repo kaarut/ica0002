@@ -1,15 +1,18 @@
-SRV1 ansible_host=193.40.156.86 ansible_port=17122 ansible_ssh_user=ubuntu
-SRV2 ansible_host=193.40.156.86 ansible_port=12322 ansible_ssh_user=ubuntu
+vm1 ansible_host=193.40.156.86 ansible_port=5822 ansible_ssh_user=ubuntu
+vm2 ansible_host=193.40.156.86 ansible_port=6222 ansible_ssh_user=ubuntu
 
 
 [web_servers]
-SRV1
+vm1
 
 [db_servers]
-SRV2
+vm2
 
 [dns_servers]
-SRV2
+vm2
 
 [prometheus]
-SRV1
+vm1
+
+[grafana]
+vm1
