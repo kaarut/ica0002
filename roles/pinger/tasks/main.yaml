@@ -1,0 +1,40 @@
+---
+- name: Install fping
+  apt:
+    name: 
+    - fping 
+
+- name: Create a pinger.service
+  template: 
+    src: pinger.service.j2
+    dest: /etc/systemd/system/pinger.service
+  notify: 
+    - restart pinger
+    - daemon-reload
+
+- name: Create a directory if it does not exist
+  ansible.builtin.file:
+    path: /etc/pinger
+    state: directory
+    mode: '0755'
+
+- name: Copy pinger conf
+  template: 
+    src: pinger.conf.j2
+    dest: /etc/pinger/pinger.conf
+  notify: daemon-reload
+
+- name: Copy the pinger.sh
+  copy:
+    src: ../files/pinger.sh
+    dest: /usr/local/bin/pinger
+    owner: ubuntu
+    mode: 0777
+  notify: restart pinger
+
+- name: Start & enable the pinger if not started
+  service: 
+    name: pinger
+    state: started
+    enabled: true
+    

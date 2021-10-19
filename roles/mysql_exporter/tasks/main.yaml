@@ -17,9 +17,8 @@
     - restart mysqld_exporter
 
 - name: Sleep for 6 seconds 
-  wait_for:
-    timeout: 6
-
+  pause:
+    seconds: 6
 
 - name: Verify exporter is running
   service:

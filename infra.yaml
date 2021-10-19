@@ -52,10 +52,20 @@
     roles: 
       - prometheus
     
-
   - name: grafana
     hosts: grafana
     become: yes
     gather_facts: no
     roles: 
       - grafana
+
+  - name: Loggers
+    hosts: loggers
+    become: yes
+    gather_facts: no
+    roles: 
+      - influxdb
+      - telegraf
+      - pinger
+      - rsyslog
+    tags: log

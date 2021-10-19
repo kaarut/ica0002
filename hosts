@@ -15,3 +15,6 @@ vm1
 
 [grafana]
 vm1
+
+[loggers]
+vm1

@@ -2,6 +2,9 @@ domain: lads
 zone: io
 fqdn: lads.io
 
+# INFLUX_DB
+influxdb_host: vm1
+
 # MYSQL 
 mysql_host: vm2
 mysql_database: agama

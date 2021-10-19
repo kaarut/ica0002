@@ -6,27 +6,32 @@
 }
 {\*\listtable{\list\listtemplateid1\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid1\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid1}}
 {\*\listoverridetable{\listoverride\listid1\listoverridecount0\ls1}}
-\paperw11900\paperh16840\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\paperw11900\paperh16840\margl1440\margr1440\vieww25100\viewh5220\viewkind0
 \pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
 
-\f0\fs24 \cf0 \
+\f0\fs30 \cf0 \
 \pard\tx220\tx720\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li720\fi-720\pardirnatural\partightenfactor0
 \ls1\ilvl0
-\fs32 \cf0 {\listtext	\uc0\u8226 	}service enable - will enable it on boot\
+\fs38 \cf0 {\listtext	\uc0\u8226 	}service enable - will enable it on boot\
 {\listtext	\uc0\u8226 	}ps ax  | grep service name \
 {\listtext	\uc0\u8226 	}nginx -t \cf2 // test\
 {\listtext	\uc0\u8226 	}\cf3 ss -l // \cf2 socket stats\
-{\listtext	\uc0\u8226 	}\cf3 sudo netstat -lntpu\cf2 \
-{\listtext	\uc0\u8226 	}\
+{\listtext	\uc0\u8226 	}\cf3 sudo netstat -lntpu\
+\pard\tx220\tx720\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li720\fi-720\pardirnatural\partightenfactor0
+\ls1\ilvl0\cf2 {\listtext	\uc0\u8226 	}| wc -l (\cf3 word count -l)\cf2 \
+{\listtext	\uc0\u8226 	}
+\f1\fs30 \cf4 \CocoaLigature0 grep -v "^#\\|^$\\|^  #" | remove \
+\ls1\ilvl0
+\f0\fs38 \cf2 \CocoaLigature1 {\listtext	\uc0\u8226 	}\
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
 
-\f1\fs22 \cf4 \CocoaLigature0 - name: Replace the default Nginx conf file\
+\f1\fs28 \cf4 \CocoaLigature0 - name: Replace the default Nginx conf file\
   ansible.builtin.copy:\
     src: ../files/default\
     dest: /etc/nginx/sites-enabled/default\
     validate: nginx -t -c %s\
   notify: restart nginx
-\f0\fs32 \cf2 \CocoaLigature1 \
+\f0\fs38 \cf2 \CocoaLigature1 \
 \
 \
 count lines | wc -l\
@@ -36,7 +41,7 @@ search commands ctrl + R\
 dpkg -l | grep sql \
 \
 
-\f1\fs22 \cf4 \CocoaLigature0 ss -lnpt | grep 3306\
+\f1\fs28 \cf4 \CocoaLigature0 ss -lnpt | grep 3306\
 \
 ____________________\
 \
@@ -55,5 +60,11 @@ node exporters on all hosts (with for loop)\
 \
 systemctl status systemd-resolved\
 ______-\
+PINGER\
+\'97\'97\'97\
+Need User, folder 	\
+\
+\
+\
 \
 }
