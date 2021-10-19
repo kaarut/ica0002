@@ -3,7 +3,7 @@ options {
 
 	forwarders {
     {% for ip in forwarders %} 
-            {{ ip }};
+        {{ ip }};
     {% endfor %}
 	};
 
@@ -11,7 +11,12 @@ options {
 
     allow-query { 
     {% for ip in acl %} 
-            {{ ip }};
+        {{ ip }};
     {% endfor %}
     };
 };
+
+statistics-channels {
+  inet 127.0.0.1 port 8053 allow { 127.0.0.1; };
+};
+

@@ -1,7 +1,9 @@
 domain: lads
 zone: io
 fqdn: lads.io
-mysql_host: srv2
+
+# MYSQL 
+mysql_host: vm2
 mysql_database: agama
 mysql_user: agama
 mysql_password: !vault |
@@ -29,3 +31,16 @@ mysql_exporter: !vault |
           37356535646565323466306237643165333938353565636638643836616162313737333765666230
           3736643734366363320a653137356338623131343736343134326538643130346561336139653538
           6530
+
+prometheus_exporters:
+  node:
+    port: 9100
+  
+  nginx: 
+    port: 9113
+  
+  bind9:
+    port: 9119
+  
+  mysql:
+    port: 9104

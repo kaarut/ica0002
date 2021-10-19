@@ -2,30 +2,38 @@ server {
     listen 80 default_server;
     server_name _;
     
-    # UWSGI 
+    # WEB SERVERS 
     {% if inventory_hostname in groups['web_servers'] %}
         location / {
             uwsgi_pass localhost:5000;
             include uwsgi_params;
         }
-    
-    # STUB
-    listen 8080 default_server;
-        location = /basic_status {
-                stub_status;
-        }   
     {% endif %}
 
     # NODE EXPORTER
     location /node-metrics
         {
-            proxy_pass http://localhost:9100/metrics;
+            proxy_pass http://localhost:{{ prometheus_exporters['node']['port'] }}/metrics;
         }
 
-    # DNS_exporter 
+    # NGINX EXPORTER
+    location /nginx-metrics
+        {
+            proxy_pass http://localhost:{{ prometheus_exporters['nginx']['port'] }}/metrics;
+        }
+
+    # BIND EXPORTER 
     {% if inventory_hostname in groups['dns_servers'] %}
         location /bind-metrics  {
-            proxy_pass localhost:8053;
+            proxy_pass http://localhost:{{ prometheus_exporters['bind9']['port'] }}/metrics;
+        }
+
+    {% endif %}
+
+    # Databases
+    {% if inventory_hostname in groups['db_servers'] %}
+        location /mysql-metrics  {
+            proxy_pass http://localhost:{{ prometheus_exporters['mysql']['port'] }}/metrics;
         }
     {% endif %}
 
@@ -37,4 +45,20 @@ server {
         }
     {% endif %}
 
+    # GRAFANA 
+    {% if inventory_hostname in groups['grafana'] %}
+    location /grafana
+        {
+            proxy_pass http://localhost:3000;
+        }
+    {% endif %}
+}
+
+server {
+    listen 8080 default_server;
+
+    # STUB
+    location = /stub_status {
+        stub_status;
+    }   
 }

@@ -12,7 +12,7 @@
 - name: Create config
   template:
     src: my.cnf.j2
-    dest: /var/lib/prometheus/.my.cnf
+    dest: /home/ubuntu/.my.cnf
   notify:
     - restart mysqld_exporter
 

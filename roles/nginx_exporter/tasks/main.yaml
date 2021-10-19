@@ -1,7 +1,7 @@
 ---
 - name: Install nginx-exporter
   ansible.builtin.apt:
-    - prometheus-nginx-exporter
+    name: prometheus-nginx-exporter
 
 - name: Verify exporter is running
   service:

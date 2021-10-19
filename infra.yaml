@@ -12,6 +12,7 @@
     roles: 
       - bind
       - bind_exporter
+    tags: dns
     
   - name: Init
     hosts: all
@@ -41,6 +42,7 @@
     roles: 
       - node_exporter
       - nginx
+      - nginx_exporter
       - dns_resolve
 
   - name: Prometheus
