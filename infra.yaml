@@ -66,6 +66,14 @@
     roles: 
       - influxdb
       - telegraf
-      - pinger
+      # - pinger
       - rsyslog
     tags: log
+
+  - name: backup
+    hosts: all
+    become: yes
+    gather_facts: yes
+    roles: 
+      - backup
+    tags: backup

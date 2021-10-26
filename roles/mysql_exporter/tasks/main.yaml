@@ -12,13 +12,13 @@
 - name: Create config
   template:
     src: my.cnf.j2
-    dest: /home/ubuntu/.my.cnf
+    dest: /var/lib/prometheus/.my.cnf
   notify:
     - restart mysqld_exporter
 
-- name: Sleep for 6 seconds 
+- name: Sleep for 12 seconds 
   pause:
-    seconds: 6
+    seconds: 12
 
 - name: Verify exporter is running
   service:
