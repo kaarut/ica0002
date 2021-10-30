@@ -58,6 +58,7 @@
     gather_facts: no
     roles: 
       - grafana
+    tags: g
 
   - name: Loggers
     hosts: loggers
@@ -66,7 +67,7 @@
     roles: 
       - influxdb
       - telegraf
-      # - pinger
+      - pinger
       - rsyslog
     tags: log
 
