@@ -19,6 +19,7 @@
     become: yes
     roles: 
       - init
+      - backup
     
   - name: MYSQL servers
     hosts: db_servers
@@ -27,7 +28,9 @@
     roles:
       - mysql
       - mysql_exporter
-  
+      - mysql_backup
+    tags: db
+
   - name: Web server
     hosts: web_servers
     become: yes
@@ -36,7 +39,7 @@
       - uwsgi
       - nginx
   
-  - name: Configure node_exporter
+  - name: Exporters
     hosts: all
     become: yes
     roles: 
@@ -52,7 +55,7 @@
     roles: 
       - prometheus
     
-  - name: grafana
+  - name: Grafana
     hosts: grafana
     become: yes
     gather_facts: no
@@ -65,16 +68,15 @@
     become: yes
     gather_facts: no
     roles: 
-      - influxdb
       - telegraf
       - pinger
       - rsyslog
     tags: log
-
-  - name: backup
-    hosts: all
+  
+  - name: influxdb_servers
+    hosts: influxdb_servers
     become: yes
-    gather_facts: yes
-    roles: 
-      - backup
-    tags: backup
+    roles:
+        - influxdb
+        - influxdb_backup
+    # tags: db

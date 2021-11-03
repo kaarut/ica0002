@@ -12,14 +12,13 @@
 - name: Install grafana
   apt:
     name: grafana
-  notify: restart grafana
 
 - name: change config
   template:
     src: grafana.ini.j2
     dest: /etc/grafana/grafana.ini
-  notify:
-    - restart grafana
+  notify: restart grafana
+
 
 - name: Verify grafana is running
   service:
@@ -27,6 +26,6 @@
     state: started
     enabled: true 
 
-- name: Add pass for grafana
-  ansible.builtin.command:
-    cmd: grafana-cli admin reset-admin-password "{{ grafana_pass }}"
+# - name: Add pass for grafana
+#   ansible.builtin.command:
+#     cmd: grafana-cli admin reset-admin-password "{{ grafana_pass }}"

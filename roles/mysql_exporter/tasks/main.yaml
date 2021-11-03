@@ -16,9 +16,9 @@
   notify:
     - restart mysqld_exporter
 
-- name: Sleep for 12 seconds 
-  pause:
-    seconds: 12
+# - name: Sleep for 12 seconds 
+#   pause:
+#     seconds: 12
 
 - name: Verify exporter is running
   service:

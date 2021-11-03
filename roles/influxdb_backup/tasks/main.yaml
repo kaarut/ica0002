@@ -1,0 +1,6 @@
+---
+- name: create directory 
+  file:
+    path: /home/backup/influxdb
+    owner: backup
+    state: directory

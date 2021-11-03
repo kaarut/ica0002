@@ -1,0 +1,33 @@
+---
+- name: create directory 
+  file:
+    path: /home/backup/mysql
+    owner: backup
+    state: directory
+    mode: '700'
+
+- name: Replace mysql conf file
+  template:
+    src: my.cnf.j2
+    dest: /home/backup/.my.cnf
+  notify: restart mysql
+
+- name: Touch a ssh known hosts file
+  template:
+    src: known_hosts.j2
+    owner: backup
+    dest: /home/backup/.ssh/known_hosts
+
+- name: MySQL user 
+  community.mysql.mysql_user:
+    name: backup
+    state: present
+    password: "{{ backup_pass }}"
+    priv: 'agama.*:LOCK TABLES,SELECT'
+    login_unix_socket: /var/run/mysqld/mysqld.sock
+    
+- name: Make a cronjob
+  template:
+    src: mysql-backup
+    dest: /etc/cron.d/mysql-backup
+
