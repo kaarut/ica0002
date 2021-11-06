@@ -1,10 +1,10 @@
 ---
-- name: Add an Apt signing key, uses whichever key is at the URL
+- name: Grafana APT repo key
   apt_key:
     url: https://packages.grafana.com/gpg.key 
     state: present
 
-- name: add this repo for stable release
+- name: Grafana APT repo
   apt_repository:
     repo: "deb https://packages.grafana.com/oss/deb stable main"
     state: present
@@ -13,19 +13,33 @@
   apt:
     name: grafana
 
-- name: change config
+- name: Grafana config template
   template:
     src: grafana.ini.j2
     dest: /etc/grafana/grafana.ini
   notify: restart grafana
 
+- name: Grafana provisioning
+  template:
+    src: grafana_provision.yaml.j2
+    dest: /etc/grafana/provisioning/datasources/default.yaml
+  notify: restart grafana
+
+- name: Grafana dashboard directory
+  file:
+    path: /var/lib/grafana/dashboards
+    state: directory
+    owner: grafana
+    group: grafana
+
+- name: Add grafana dashboard
+  copy:
+    src: main.json
+    dest: /var/lib/grafana/dashboards/
+  notify: restart grafana
 
 - name: Verify grafana is running
   service:
     name: grafana-server
     state: started
     enabled: true 
-
-# - name: Add pass for grafana
-#   ansible.builtin.command:
-#     cmd: grafana-cli admin reset-admin-password "{{ grafana_pass }}"

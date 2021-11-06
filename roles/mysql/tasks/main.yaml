@@ -26,8 +26,7 @@
   community.mysql.mysql_user:
     state: present
     name: "{{ mysql_user }}"
-    # host: "%"
+    host: "%"
     password: "{{ mysql_password }}"
     priv: "{{ mysql_database }}.*:ALL"
     login_unix_socket: /var/run/mysqld/mysqld.sock
-

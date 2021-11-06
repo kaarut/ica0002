@@ -12,12 +12,6 @@
     dest: /home/backup/.my.cnf
   notify: restart mysql
 
-- name: Touch a ssh known hosts file
-  template:
-    src: known_hosts.j2
-    owner: backup
-    dest: /home/backup/.ssh/known_hosts
-
 - name: MySQL user 
   community.mysql.mysql_user:
     name: backup
@@ -30,4 +24,3 @@
   template:
     src: mysql-backup
     dest: /etc/cron.d/mysql-backup
-

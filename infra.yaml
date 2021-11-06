@@ -71,7 +71,7 @@
       - telegraf
       - pinger
       - rsyslog
-    tags: log
+    tags: l
   
   - name: influxdb_servers
     hosts: influxdb_servers
@@ -79,4 +79,4 @@
     roles:
         - influxdb
         - influxdb_backup
-    # tags: db
+    tags: db

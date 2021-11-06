@@ -11,8 +11,7 @@
     
 - name: Install telegraf
   apt:
-    name: 
-    - telegraf
+    name: telegraf
 
 - name: Configure telegraf
   template: 

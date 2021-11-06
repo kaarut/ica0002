@@ -1,7 +1,3 @@
-- name: Install mysqld exporter
-  apt:
-    name: prometheus-mysqld-exporter
-
 - name: MySQL user 
   community.mysql.mysql_user:
     name: exporter
@@ -13,12 +9,14 @@
   template:
     src: my.cnf.j2
     dest: /var/lib/prometheus/.my.cnf
-  notify:
-    - restart mysqld_exporter
+    owner: prometheus
+    group: prometheus
+    mode: 0600
+  notify: restart mysqld_exporter
 
-# - name: Sleep for 12 seconds 
-#   pause:
-#     seconds: 12
+- name: Install mysqld exporter
+  apt:
+    name: prometheus-mysqld-exporter
 
 - name: Verify exporter is running
   service:

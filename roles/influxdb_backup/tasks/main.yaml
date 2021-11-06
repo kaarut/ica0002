@@ -1,6 +1,19 @@
 ---
-- name: create directory 
+- name: create influxdb dir
   file:
     path: /home/backup/influxdb
     owner: backup
     state: directory
+    mode: '700'
+
+- name: create restore dir
+  file:
+    path: /home/backup/restore
+    owner: backup
+    state: directory
+    mode: '700'
+
+- name: Make a cronjob
+  template:
+    src: influxdb-backup
+    dest: /etc/cron.d/influxdb-backup

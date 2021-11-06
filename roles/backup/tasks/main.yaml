@@ -17,3 +17,9 @@
   apt:
     name: duplicity
     state: present
+
+- name: Touch a ssh known hosts file
+  template:
+    src: known_hosts.j2
+    owner: backup
+    dest: /home/backup/.ssh/known_hosts

@@ -5,8 +5,14 @@ fqdn: lads.io
 # BACKUP
 backup_server: 192.168.42.156
 
+# PROMETHEUS
+prometheus_host: vm1
+
 # INFLUX_DB
 influxdb_host: vm1
+
+# GRAFANA
+grafana_host: vm1
 
 # MYSQL 
 mysql_host: vm2

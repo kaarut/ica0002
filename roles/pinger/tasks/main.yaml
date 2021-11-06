@@ -2,8 +2,8 @@
 
 - name: Install fping
   apt:
-    name: 
-    - fping 
+    name: fping 
+    state: latest
 
 - name: Add the user "pinger" and generate keys
   user:

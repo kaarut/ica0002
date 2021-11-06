@@ -14,6 +14,12 @@
     name: 
     - influxdb
 
+- name: Change config
+  copy:
+    src: influxdb.conf
+    dest: /etc/influxdb/influxdb.conf
+  notify: restart influx
+
 - name: Verify influxdb is running
   service:
     name: influxdb

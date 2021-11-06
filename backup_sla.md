@@ -13,15 +13,16 @@ The RPO is the acceptable amount of data that can be lost in the event of a fail
 Backup recovery point objective:
 + MySQL = 12 hours
 + InfluxDB = 12 hours
-+ Ansible repository = 4 weeks / 28 days
++ Ansible repository = 12 hours
 
 <h1>Versioning and retention</h1>
 MySQL and Grafana backups are retained for 4 weeks/28 days, only 2 versions can be stored at the same time.
 
 <h1>Usability checks</h1>
-Usability of the last MySQL and Grafana repository backup is regularly checked every 1 week/7 days before new modifications to Ansible repository and Grafana configuration is done. The test is done on the virtual environment setup, simulating with real infrastructure. 
+Usability of the last MySQL and Grafana repository backup is regularly checked every 24 hours before new modifications to Ansible repository and Grafana configuration is done. The test is done on the virtual environment setup, simulating with real infrastructure. 
 
 <h1>Restoration criteria</h1>
+...
 
 <h1>[Backup RTO]</h1>
 
