@@ -10,7 +10,7 @@ Restore MySQL data from the backup:
 
     sudo -u backup duplicity --no-encryption restore rsync://kaarut@backup//home/kaarut/ /home/backup/restore/agama.sql
 
-    sudo mysqldump agama < /home/backup/restore/agama.sql 
+    sudo mysql agama < /home/backup/restore/agama.sql 
 
 <h3>[How to restore InfluxDB?]</h3>
 
@@ -25,6 +25,3 @@ Restore InfluxDB data from the backup:
     [IF THE LOCAL BACKUP WAS CORRUPTED]
     sudo -u backup duplicity --no-encryption restore rsync://kaarut@backup//home/kaarut/ /home/backup/restore/
     influxd restore -portable -database telegraf /home/backup/restore   
-
-
-

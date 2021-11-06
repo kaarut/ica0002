@@ -5,6 +5,6 @@
 
 - name: Configure rsyslog.conf
   template: 
-    src: rsyslog.conf.j2
+    src: rsyslog.conf.j2 
     dest: /etc/rsyslog.d/10-telegraf.conf
   notify: rsyslog restart
