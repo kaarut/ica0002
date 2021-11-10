@@ -23,3 +23,12 @@
     name: prometheus-mysqld-exporter
     state: started
     enabled: true 
+
+- name: Change slave config 
+  ansible.builtin.copy:
+    src: ../files/prometheus-mysqld-exporter
+    dest: /etc/default/prometheus-mysqld-exporter
+    # owner: 
+    # mode: 0777
+  notify: restart mysqld_exporter
+

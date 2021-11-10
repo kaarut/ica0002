@@ -1,3 +1,5 @@
+{% if inventory_hostname != mysql_host -%}
 10 */11 * * * backup rm -rf /home/backup/influxdb/*; influxd backup -database telegraf /home/backup/influxdb
 0 11 * * * backup duplicity --no-encryption full /home/backup/influxdb rsync://kaarut@backup//home/kaarut/
 20 */11 * * * backup duplicity --no-encryption incremental /home/backup/influxdb rsync://kaarut@backup//home/kaarut/
+{% endif -%}

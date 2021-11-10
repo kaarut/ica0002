@@ -19,10 +19,16 @@
     dest: /etc/grafana/grafana.ini
   notify: restart grafana
 
+# - name: Grafana provisioning
+#   template:
+#     src: grafana_provision.yaml.j2
+#     dest: /etc/grafana/provisioning/datasources/sample.yaml
+#   notify: restart grafana
+
 - name: Grafana provisioning
-  template:
-    src: grafana_provision.yaml.j2
-    dest: /etc/grafana/provisioning/datasources/default.yaml
+  copy:
+    src: main.yaml
+    dest: /etc/grafana/provisioning/datasources/main.yaml
   notify: restart grafana
 
 - name: Grafana dashboard directory
@@ -32,11 +38,15 @@
     owner: grafana
     group: grafana
 
-- name: Add grafana dashboard
+- name: Add main grafana dashboard
   copy:
     src: main.json
-    dest: /var/lib/grafana/dashboards/
-  notify: restart grafana
+    dest: /var/lib/grafana/dashboards/main.json
+
+- name: Add MYSQL dashboard for Grafana
+  copy:
+    src: main.json
+    dest: /var/lib/grafana/dashboards/mysql.json
 
 - name: Verify grafana is running
   service:

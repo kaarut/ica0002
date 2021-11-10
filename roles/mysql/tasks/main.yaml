@@ -5,24 +5,17 @@
     - python3-pymysql
 
 - name: Replace the default mysql conf file
-  ansible.builtin.copy:
-    src: override.cnf
+  template:
+    src: override.cnf.j2
     dest: /etc/mysql/mysql.conf.d/override.cnf
   notify: restart mysql
-
-- name: start & enable - mysql
-  service:
-    name: mysql
-    state: started
-    enabled: yes
-  become: yes
 
 - name: MySQL database
   community.mysql.mysql_db:
     name: "{{ mysql_database }}"
     login_unix_socket: /var/run/mysqld/mysqld.sock
 
-- name: MySQL user 
+- name: MySQL user for Agama
   community.mysql.mysql_user:
     state: present
     name: "{{ mysql_user }}"
@@ -30,3 +23,31 @@
     password: "{{ mysql_password }}"
     priv: "{{ mysql_database }}.*:ALL"
     login_unix_socket: /var/run/mysqld/mysqld.sock
+
+- name: MySQL user for replication
+  community.mysql.mysql_user:
+    name: "{{ mysql_replication_user }}"
+    password: "{{ replication_pass }}"
+    host: "%"
+    priv: "*.*:REPLICATION SLAVE"
+    login_unix_socket: /var/run/mysqld/mysqld.sock
+
+- name: Read only ON
+  community.mysql.mysql_variables:
+    variable: read_only
+    value: 'ON'
+    mode: persist
+    login_unix_socket: /var/run/mysqld/mysqld.sock
+  when: inventory_hostname != mysql_host
+  notify: 
+    - Reset MYSQL source
+    - Reset MYSQL replica
+  tags: ch
+
+- name: Read only OFF
+  community.mysql.mysql_variables:
+    variable: read_only
+    value: 'OFF'
+    mode: persist
+    login_unix_socket: /var/run/mysqld/mysqld.sock 
+  when: inventory_hostname == mysql_host
