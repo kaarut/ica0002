@@ -1,15 +1,9 @@
 apiVersion: 1
-
 providers:
-  - name: Main   # A uniquely identifiable name for the provider
-    folder:  # The folder where to place the dashboards
-    type: file
-    options:
-      path:  /var/lib/grafana/dashboards
-  
-
-  - name: MYSQL   # A uniquely identifiable name for the provider
-    folder:  # The folder where to place the dashboards
+  - name: Main
+    orgId: 1
+    folder: ''
+    folderUid: ''
     type: file
     options:
       path:  /var/lib/grafana/dashboards

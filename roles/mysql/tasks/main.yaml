@@ -10,7 +10,13 @@
     dest: /etc/mysql/mysql.conf.d/override.cnf
   notify: restart mysql
 
-- name: MySQL database
+- name: start mysql server
+  service:
+    name: mysql
+    state: started
+    enabled: yes
+
+- name: MySQL database for Agama
   community.mysql.mysql_db:
     name: "{{ mysql_database }}"
     login_unix_socket: /var/run/mysqld/mysqld.sock
@@ -32,22 +38,13 @@
     priv: "*.*:REPLICATION SLAVE"
     login_unix_socket: /var/run/mysqld/mysqld.sock
 
-- name: Read only ON
+- name: Read only ON/OFF
   community.mysql.mysql_variables:
     variable: read_only
-    value: 'ON'
-    mode: persist
-    login_unix_socket: /var/run/mysqld/mysqld.sock
-  when: inventory_hostname != mysql_host
-  notify: 
-    - Reset MYSQL source
-    - Reset MYSQL replica
-  tags: ch
-
-- name: Read only OFF
-  community.mysql.mysql_variables:
-    variable: read_only
-    value: 'OFF'
+    value: "{{ 'OFF' if inventory_hostname == mysql_host else 'ON' }}"
     mode: persist
     login_unix_socket: /var/run/mysqld/mysqld.sock 
-  when: inventory_hostname == mysql_host
+  notify:
+    - Reset MySQL source
+    - Reset MySQL replica
+  tags: ch
