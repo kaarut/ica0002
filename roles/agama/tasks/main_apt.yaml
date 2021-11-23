@@ -1,0 +1,22 @@
+- name: Linux user agama
+  ansible.builtin.user:
+    name: agama
+
+- name: Dir for agama
+  file:
+    path: /opt/agama
+    state: directory 
+    owner: agama
+    mode: 0755
+
+- name: Installing dependencies
+  ansible.builtin.apt:
+    name: python3-flask-sqlalchemy
+    update_cache: yes
+
+- name: Download the app
+  get_url:
+    url: https://raw.githubusercontent.com/hudolejev/agama/master/agama.py
+    dest: /opt/agama/agama.py
+
+

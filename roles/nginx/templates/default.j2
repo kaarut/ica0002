@@ -5,8 +5,13 @@ server {
     # WEB SERVERS 
     {% if inventory_hostname in groups['web_servers'] %}
         location / {
-            uwsgi_pass localhost:5000;
-            include uwsgi_params;
+            # UWSGI BASED SETUP
+            # uwsgi_pass localhost:5000;
+            # include uwsgi_params;
+            
+            # DOCKER SETUP
+            proxy_pass http://localhost:{{ agama_port }};
+            proxy_set_header Host $http_host;
         }
     {% endif %}
 
@@ -46,16 +51,13 @@ server {
     {% endif %}
 
     # GRAFANA 
-    {% if inventory_hostname in groups['grafana'] %}
     location /grafana
         {
-            proxy_pass http://localhost:3000;
+            proxy_pass http://localhost:{{ grafana_port }};
         }
-    {% endif %}
-
 
     # InfluxDB
-    {% if inventory_hostname in groups['grafana'] %}
+    {% if inventory_hostname in groups['grafana_servers'] %}
     location /influxdb-metrics
         {
             proxy_pass http://localhost:3000;

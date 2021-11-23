@@ -9,10 +9,14 @@ backup_server: 192.168.42.156
 prometheus_host: vm1
 
 # INFLUX_DB
-influxdb_host: vm1
+influxdb_host: vm2
 
 # GRAFANA
 grafana_host: vm1
+grafana_port: 3001
+
+# Agama
+agama_port: 81
 
 # MYSQL 
 mysql_host: vm2

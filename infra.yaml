@@ -7,7 +7,7 @@
       - setup:
 
   - name: DNS servers
-    hosts: db_servers
+    hosts: dns_servers
     become: yes
     roles: 
       - bind
@@ -20,7 +20,25 @@
     roles: 
       - init
       - backup
-    
+      - docker
+      - dns_resolve
+
+  - name: Web server
+    hosts: web_servers
+    become: yes
+    roles:
+      - agama
+      # - uwsgi
+      - nginx
+    tags: web
+
+  - name: Prometheus
+    hosts: prometheus
+    become: yes
+    gather_facts: no
+    roles: 
+      - prometheus
+
   - name: MYSQL servers
     hosts: db_servers
     become: yes
@@ -30,14 +48,6 @@
       - mysql_exporter
       - mysql_backup
     tags: db
-
-  - name: Web server
-    hosts: web_servers
-    become: yes
-    roles:
-      - agama
-      - uwsgi
-      - nginx
   
   - name: Exporters
     hosts: all
@@ -46,32 +56,23 @@
       - node_exporter
       - nginx
       - nginx_exporter
-      - dns_resolve
 
-  - name: Prometheus
-    hosts: prometheus
-    become: yes
-    gather_facts: no
-    roles: 
-      - prometheus
-    
   - name: Grafana
-    hosts: grafana
+    hosts: grafana_servers
     become: yes
     gather_facts: no
     roles: 
       - grafana
-    tags: g
 
   - name: Loggers
-    hosts: loggers
+    hosts: web_servers
     become: yes
     gather_facts: no
     roles: 
       - telegraf
       - pinger
       - rsyslog
-    tags: l
+    tags: log
   
   - name: influxdb_servers
     hosts: influxdb_servers

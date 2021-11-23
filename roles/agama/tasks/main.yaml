@@ -2,21 +2,35 @@
   ansible.builtin.user:
     name: agama
 
+# - name: Installing dependencies
+#   ansible.builtin.apt:
+#     name: python3-flask-sqlalchemy
+#     update_cache: yes
+
 - name: Dir for agama
   file:
     path: /opt/agama
     state: directory 
-    owner: agama
-    mode: 0755
-
-- name: Installing dependencies
-  ansible.builtin.apt:
-    name: python3-flask-sqlalchemy
-    update_cache: yes
 
 - name: Download the app
-  get_url:
-    url: https://raw.githubusercontent.com/hudolejev/agama/master/agama.py
-    dest: /opt/agama/agama.py
+  ansible.builtin.get_url:
+    url: https://raw.githubusercontent.com/hudolejev/agama/master/Dockerfile
+    dest: /opt/agama/Dockerfile
 
+- name: Build Agama image
+  docker_image:
+    name: agama
+    build:
+      path: /opt/agama
+      network: host
+    source: build   
 
+- name: Agama container
+  docker_container:
+    name: agama
+    image: agama
+    env:
+      AGAMA_DATABASE_URI: mysql+pymysql://{{ mysql_user }}:{{ mysql_password }}@{{ mysql_host }}/{{ mysql_database }}
+    published_ports: "{{ agama_port }}:8000"
+    container_default_behavior: no_defaults 
+    restart_policy: always
