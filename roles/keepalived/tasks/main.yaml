@@ -1,0 +1,39 @@
+---
+- name: Install haproxy & keepalived
+  apt:  
+    name: keepalived
+    
+- name: Replace keepalived conf
+  template:
+    src: keepalived.conf.j2
+    dest: /etc/keepalived/keepalived.conf
+  notify: restart keepalived
+
+- name: Add the script
+  template:
+    src: keepalived_script.j2
+    dest: /usr/local/bin/keepalived_script
+    mode: 755
+
+- name: Install keepalived monitoring
+  unarchive:
+    src: https://github.com/cafebazaar/keepalived-exporter/releases/download/v1.2.0/keepalived-exporter-1.2.0.linux-amd64.tar.gz
+    dest: /usr/local/bin/
+    remote_src: yes
+
+- name: Create keepalived_monitor
+  template:
+    src: keepalived_service
+    dest: /etc/systemd/system/keepalived_monitor.service
+  notify:
+    - restart keepalived_monitor
+    - daemon-reload
+
+- name: Start "{{ item }}"
+  service:
+    name: "{{ item }}"
+    state: started
+    enabled: yes
+  loop:
+    - keepalived
+    - keepalived_monitor

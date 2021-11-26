@@ -57,12 +57,26 @@ server {
         }
 
     # InfluxDB
-    {% if inventory_hostname in groups['grafana_servers'] %}
+    {% if inventory_hostname in groups['db_servers'] %}
     location /influxdb-metrics
         {
-            proxy_pass http://localhost:3000;
+            proxy_pass http://localhost:9424/metrics;
         }
     {% endif %}
+
+    # KeepaliveD
+    {% if inventory_hostname in groups['haproxy'] %}
+
+    location /haproxy-metrics
+        {
+            proxy_pass http://localhost:9101/metrics;
+        }
+    location /keepalived-metrics
+        {
+            proxy_pass http://localhost:9165/metrics;
+        }
+    {% endif %}
+
 }
 
 server {

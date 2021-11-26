@@ -1,8 +1,13 @@
-
-- name: Grafana directory
-  file:
-    path: /opt/grafana
+---
+- name: Create all Grafana directories
+  ansible.builtin.file:
+    name: "{{ item }}"
+    recurse: yes
     state: directory
+  loop:
+    - /opt/grafana
+    - /opt/grafana/provisioning/dashboards
+    - /opt/grafana/provisioning/datasources
 
 - name: Grafana config
   ansible.builtin.template:
@@ -10,14 +15,28 @@
     dest: /opt/grafana/grafana.ini
   no_log: yes
 
-# - name: Grafana provisioning
-#   ansible.builtin.template:
-#     src: "{{ item }}.yaml.j2"
-#     dest: "/opt/grafana/provisioning/{{ item }}/default.yaml"
-#   loop:
-#     - dashboards
-#     - datasources
-#   notify: restart grafana
+- name: Grafana datasources
+  ansible.builtin.template:
+    src: "{{ item }}.yaml"
+    dest: "/opt/grafana/provisioning/datasources/{{ item }}"
+  loop:
+    - sample
+    - latency
+    - telegraf
+
+- name: Grafana dashboard
+  ansible.builtin.template:
+    src: main.yaml
+    dest: /opt/grafana/provisioning/dashboards/main.yaml
+
+- name: Grafana dashboard panels
+  ansible.builtin.copy:
+    src: "{{ item }}"
+    dest: "/opt/grafana/provisioning/dashboards/{{ item  }}"
+  loop:
+    - main.json
+    - MySQL.json
+    - syslog.json
 
 - name: Grafana Docker container
   docker_container:

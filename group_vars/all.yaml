@@ -2,6 +2,14 @@ domain: lads
 zone: io
 fqdn: lads.io
 
+nginx_container_per_vm: 2
+
+#BIND
+localnetwork: 192.168.42.0/24
+docker_network: 172.17.0.0/16
+localhost: 127.0.0.0/8
+localhost_address: 127.0.0.1
+
 # BACKUP
 backup_server: 192.168.42.156
 

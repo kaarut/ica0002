@@ -1,0 +1,14 @@
+---
+- name: restart keepalived
+  service: 
+    name: keepalived
+    state: restarted
+
+- name: restart keepalived_monitor
+  service:
+    name: keepalived_monitor
+    state: restarted
+
+- name: daemon-reload
+  command:
+    cmd: systemctl daemon-reload

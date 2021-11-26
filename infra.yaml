@@ -11,7 +11,7 @@
     become: yes
     roles: 
       - bind
-      - bind_exporter
+      # - bind_exporter
     tags: dns
     
   - name: Init
@@ -30,6 +30,9 @@
       - agama
       # - uwsgi
       - nginx
+      - haproxy
+      - haproxy_exporter
+      - keepalived
     tags: web
 
   - name: Prometheus
@@ -80,4 +83,12 @@
     roles:
         - influxdb
         - influxdb_backup
+        - influxdb_exporter
     tags: db
+
+  # - name: docker
+  #   hosts: web_servers
+  #   become: yes
+  #   gather_facts: yes
+  #   roles:
+  #     - 

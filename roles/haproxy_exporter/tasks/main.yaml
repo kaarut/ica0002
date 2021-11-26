@@ -1,0 +1,11 @@
+---
+- name: Install haproxy exporter
+  apt:
+    pkg: prometheus-haproxy-exporter
+
+
+- name: Change the default config
+  template: 
+    src: prometheus-haproxy-exporter
+    dest: /etc/default/prometheus-haproxy-exporter
+  notify: haproxy_exporter restart

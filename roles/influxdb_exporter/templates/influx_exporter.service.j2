@@ -1,0 +1,10 @@
+[Unit]
+Description=influxdb_exporter service
+After=network-online.target
+
+[Service]
+User=prometheus
+ExecStart=/usr/local/bin/influxdb_exporter
+
+[Install]
+WantedBy=multi-user.target

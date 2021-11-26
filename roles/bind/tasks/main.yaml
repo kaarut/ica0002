@@ -2,7 +2,7 @@
 - name: Install bind9
   apt:
     pkg: bind9
-    update_cache: yes
+    # update_cache: yes
   
 - name: Installing the options
   template: 

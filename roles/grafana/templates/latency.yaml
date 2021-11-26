@@ -1,0 +1,15 @@
+---
+apiVersion: 1
+
+datasources:
+  - name: InfluxDB
+    type: influxdb
+    access: proxy
+    orgId: 1
+    url: http://vm2:8086
+    password:
+    user:
+    database: latency
+    isDefault: false
+    version: 1
+    editable: false
