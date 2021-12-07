@@ -9,9 +9,11 @@
   - name: DNS servers
     hosts: dns_servers
     become: yes
+    gather_facts: yes
     roles: 
       - bind
-      # - bind_exporter
+      - bind_exporter
+      - dns_records
     tags: dns
     
   - name: Init
@@ -22,6 +24,7 @@
       - backup
       - docker
       - dns_resolve
+    tags: init
 
   - name: Web server
     hosts: web_servers
@@ -41,6 +44,7 @@
     gather_facts: no
     roles: 
       - prometheus
+    tags: pr
 
   - name: MYSQL servers
     hosts: db_servers
@@ -66,13 +70,13 @@
     gather_facts: no
     roles: 
       - grafana
+    tags: g
 
   - name: Loggers
     hosts: web_servers
     become: yes
-    gather_facts: no
+    gather_facts: no  
     roles: 
-      - telegraf
       - pinger
       - rsyslog
     tags: log
@@ -85,10 +89,3 @@
         - influxdb_backup
         - influxdb_exporter
     tags: db
-
-  # - name: docker
-  #   hosts: web_servers
-  #   become: yes
-  #   gather_facts: yes
-  #   roles:
-  #     - 

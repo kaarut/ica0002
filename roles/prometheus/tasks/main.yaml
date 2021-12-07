@@ -1,16 +1,14 @@
 ---
 - name: Install APT package
   apt:
-    name:
-    - prometheus
+    name: prometheus
+    state: latest
 
 - name: Configure the template
   template: 
     src: prometheus.yml.j2
     dest: /etc/prometheus/prometheus.yml
-  notify: 
-    - restart prometheus
-    - restart nginx
+  notify: restart prometheus
 
 - name: Configure the prometheus config
   template: 

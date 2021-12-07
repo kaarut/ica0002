@@ -2,7 +2,9 @@
 
 - name: Install fping
   apt:
-    name: fping 
+    name: 
+    - fping 
+    - curl
     state: latest
 
 - name: Add the user "pinger" and generate keys
@@ -15,14 +17,12 @@
   template: 
     src: pinger.conf.j2
     dest: /etc/pinger/pinger.conf
-    owner: pinger
   notify: daemon-reload
 
 - name: Copy the pinger.sh
   copy:
     src: ../files/pinger.sh
     dest: /usr/local/bin/pinger
-    owner: pinger
     mode: 0777
   notify: restart pinger
 

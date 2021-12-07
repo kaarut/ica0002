@@ -21,8 +21,8 @@ MySQL and Grafana backups are retained for 4 weeks/28 days, only 2 versions can 
 <h1>Usability checks</h1>
 Usability of the last MySQL and Grafana repository backup is regularly checked every 24 hours before new modifications to Ansible repository and Grafana configuration is done. The test is done on the virtual environment setup, simulating with real infrastructure. 
 
-<h1>Restoration criteria</h1>
-...
+<!-- <h1>Restoration criteria</h1>
+... -->
 
 <h1>[Backup RTO]</h1>
 

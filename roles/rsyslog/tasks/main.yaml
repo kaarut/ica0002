@@ -1,10 +1,17 @@
-- name: Install telegraf
-  apt:
-    name: 
-    - rsyslog
+---
+- name: Install Rsyslog
+  ansible.builtin.apt:
+    name: rsyslog
+    state: latest
 
-- name: Configure rsyslog.conf
-  template: 
-    src: rsyslog.conf.j2 
-    dest: /etc/rsyslog.d/10-telegraf.conf
+- name: config rsyslog
+  ansible.builtin.template:
+    src: 50-telegraf.conf.j2
+    dest: /etc/rsyslog.d/50-telegraf.conf
   notify: rsyslog restart
+
+- name: start rsyslog
+  ansible.builtin.service:
+    name: rsyslog
+    state: started
+    enabled: yes

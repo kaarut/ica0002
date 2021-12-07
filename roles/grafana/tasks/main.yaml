@@ -4,6 +4,7 @@
     name: "{{ item }}"
     recurse: yes
     state: directory
+    mode: 0775
   loop:
     - /opt/grafana
     - /opt/grafana/provisioning/dashboards
@@ -17,12 +18,12 @@
 
 - name: Grafana datasources
   ansible.builtin.template:
-    src: "{{ item }}.yaml"
+    src: "{{ item }}"
     dest: "/opt/grafana/provisioning/datasources/{{ item }}"
   loop:
-    - sample
-    - latency
-    - telegraf
+    - sample.yaml
+    - latency.yaml
+    - telegraf.yaml
 
 - name: Grafana dashboard
   ansible.builtin.template:
@@ -32,10 +33,10 @@
 - name: Grafana dashboard panels
   ansible.builtin.copy:
     src: "{{ item }}"
-    dest: "/opt/grafana/provisioning/dashboards/{{ item  }}"
+    dest: "/opt/grafana/provisioning/dashboards/{{ item }}"
   loop:
     - main.json
-    - MySQL.json
+    - mysql.json
     - syslog.json
 
 - name: Grafana Docker container

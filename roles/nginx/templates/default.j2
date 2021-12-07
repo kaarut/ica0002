@@ -30,7 +30,7 @@ server {
     # BIND EXPORTER 
     {% if inventory_hostname in groups['dns_servers'] %}
         location /bind-metrics  {
-            proxy_pass http://localhost:{{ prometheus_exporters['bind9']['port'] }}/metrics;
+            proxy_pass http://localhost:9119/metrics;
         }
 
     {% endif %}

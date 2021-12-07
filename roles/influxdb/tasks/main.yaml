@@ -9,19 +9,29 @@
     repo: "deb https://repos.influxdata.com/ubuntu focal stable"
     state: present
     
-- name: Install influxdb
+- name: Install influxdb and telegraf
   apt:
     name: 
     - influxdb
+    - telegraf
 
-- name: Change config
+- name: Configure influxdb
   copy:
     src: influxdb.conf
     dest: /etc/influxdb/influxdb.conf
   notify: restart influx
 
-- name: Verify influxdb is running
+- name: Configure telegraf
+  copy: 
+    src: telegraf.conf
+    dest: /etc/telegraf/telegraf.conf
+  notify: telegraf restart
+
+- name: Verify apps are running
   service:
-    name: influxdb
-    state: started
+    name: "{{ item }}"
+    state: started 
     enabled: true 
+  loop:
+    - influxdb
+    - telegraf

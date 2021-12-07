@@ -1,7 +1,7 @@
 - name: Installing Nginx package
   ansible.builtin.apt:
     name: nginx
-    state: present
+    state: latest
     
 - name: Replace the default Nginx conf file
   template:
