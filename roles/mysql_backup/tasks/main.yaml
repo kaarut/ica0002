@@ -3,24 +3,29 @@
   file:
     path: /home/backup/mysql
     owner: backup
+    group: backup
     state: directory
-    mode: '700'
+    mode: 0755
 
 - name: Replace mysql conf file
   template:
     src: my.cnf.j2
     dest: /home/backup/.my.cnf
+    owner: backup
+    group: backup
+    mode: 0400
   notify: restart mysql
 
 - name: MySQL user 
   community.mysql.mysql_user:
     name: backup
-    state: present
     password: "{{ backup_pass }}"
-    priv: 'agama.*:LOCK TABLES,SELECT'
+    priv: 
+      '*.*': 'LOCK TABLES,SELECT'
     login_unix_socket: /var/run/mysqld/mysqld.sock
     
 - name: Make a cronjob
   template:
     src: mysql-backup
     dest: /etc/cron.d/mysql-backup
+    mode: 0755

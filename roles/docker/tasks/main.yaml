@@ -4,9 +4,21 @@
     name:
     - docker.io
     - python3-docker
+    - iptables-persistent
+
+- name: IPtables template
+  template:
+    src: iptables
+    dest: /var/local/iptables.mangle
 
 - name: Docker service
   service:
     name: docker
     state: started
     enabled: yes
+
+- name: Iptables restore
+  community.general.iptables_state:
+    path: /var/local/iptables.mangle
+    state: restored
+    table: mangle

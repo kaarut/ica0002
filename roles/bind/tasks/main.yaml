@@ -17,6 +17,7 @@
   template: 
     src: db.domain
     dest: /var/cache/bind/db.{{ fqdn }}
+    force: no
   notify: reload rndc
 
 - name: Installing the db.reverse
@@ -24,8 +25,8 @@
   template: 
     src: db.domain.reverse
     dest: /var/cache/bind/db.reverse
+    force: no
   notify: reload rndc
-
 
 - name: Installing the local
   template: 

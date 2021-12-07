@@ -20,7 +20,6 @@
   },
   "editable": true,
   "fiscalYearStartMonth": 0,
-  "gnetId": null,
   "graphTooltip": 0,
   "id": 1,
   "links": [
@@ -40,11 +39,14 @@
   "liveNow": false,
   "panels": [
     {
-      "datasource": "prometheus",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "P1809F7CD0C75ACF3"
+      },
       "fieldConfig": {
         "defaults": {
           "color": {
-            "mode": "thresholds"
+            "mode": "continuous-GrYlRd"
           },
           "mappings": [
             {
@@ -52,12 +54,12 @@
                 "0": {
                   "color": "red",
                   "index": 1,
-                  "text": "💩"
+                  "text": "‼️"
                 },
                 "1": {
                   "color": "green",
                   "index": 0,
-                  "text": "🌞"
+                  "text": "💛"
                 }
               },
               "type": "value"
@@ -65,6 +67,7 @@
           ],
           "max": 1,
           "min": 0,
+          "noValue": "123",
           "thresholds": {
             "mode": "absolute",
             "steps": [
@@ -89,8 +92,8 @@
       },
       "id": 14,
       "options": {
-        "colorMode": "value",
-        "graphMode": "area",
+        "colorMode": "background",
+        "graphMode": "none",
         "justifyMode": "auto",
         "orientation": "vertical",
         "reduceOptions": {
@@ -103,7 +106,7 @@
         "text": {},
         "textMode": "value"
       },
-      "pluginVersion": "8.2.3",
+      "pluginVersion": "8.3.0",
       "targets": [
         {
           "exemplar": true,
@@ -117,7 +120,10 @@
       "type": "stat"
     },
     {
-      "datasource": "prometheus",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "P1809F7CD0C75ACF3"
+      },
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -130,11 +136,11 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "red",
+                "color": "purple",
                 "value": null
               },
               {
-                "color": "green",
+                "color": "blue",
                 "value": 1
               }
             ]
@@ -150,7 +156,7 @@
       },
       "id": 12,
       "options": {
-        "colorMode": "none",
+        "colorMode": "background",
         "graphMode": "none",
         "justifyMode": "center",
         "orientation": "auto",
@@ -164,7 +170,7 @@
         "text": {},
         "textMode": "value"
       },
-      "pluginVersion": "8.2.3",
+      "pluginVersion": "8.3.0",
       "targets": [
         {
           "exemplar": true,
@@ -178,7 +184,10 @@
       "type": "stat"
     },
     {
-      "datasource": "prometheus",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "P1809F7CD0C75ACF3"
+      },
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -241,7 +250,7 @@
         "text": {},
         "textMode": "value"
       },
-      "pluginVersion": "8.2.3",
+      "pluginVersion": "8.3.0",
       "targets": [
         {
           "exemplar": true,
@@ -255,7 +264,10 @@
       "type": "stat"
     },
     {
-      "datasource": "prometheus",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "P1809F7CD0C75ACF3"
+      },
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -318,7 +330,7 @@
         "text": {},
         "textMode": "value"
       },
-      "pluginVersion": "8.2.3",
+      "pluginVersion": "8.3.0",
       "targets": [
         {
           "exemplar": true,
@@ -332,7 +344,10 @@
       "type": "stat"
     },
     {
-      "datasource": "prometheus",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "P1809F7CD0C75ACF3"
+      },
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -395,7 +410,7 @@
         "text": {},
         "textMode": "value"
       },
-      "pluginVersion": "8.2.3",
+      "pluginVersion": "8.3.0",
       "targets": [
         {
           "exemplar": true,
@@ -409,7 +424,10 @@
       "type": "stat"
     },
     {
-      "datasource": "prometheus",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "P1809F7CD0C75ACF3"
+      },
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -492,7 +510,7 @@
     }
   ],
   "refresh": "30s",
-  "schemaVersion": 31,
+  "schemaVersion": 33,
   "style": "dark",
   "tags": [],
   "templating": {
@@ -506,5 +524,6 @@
   "timezone": "",
   "title": "Mysql",
   "uid": "mysql",
-  "version": 1
+  "version": 1,
+  "weekStart": ""
 }
