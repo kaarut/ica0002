@@ -222,11 +222,6 @@
           "mappings": [
             {
               "options": {
-                "0": {
-                  "color": "super-light-blue",
-                  "index": 2,
-                  "text": "💀"
-                },
                 "1": {
                   "color": "yellow",
                   "index": 1,
@@ -239,6 +234,17 @@
                 }
               },
               "type": "value"
+            },
+            {
+              "options": {
+                "match": "null",
+                "result": {
+                  "color": "dark-red",
+                  "index": 2,
+                  "text": "DEAD"
+                }
+              },
+              "type": "special"
             }
           ],
           "thresholds": {
@@ -258,8 +264,8 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 6,
-        "w": 16,
+        "h": 5,
+        "w": 8,
         "x": 8,
         "y": 5
       },
@@ -271,7 +277,7 @@
         "orientation": "auto",
         "reduceOptions": {
           "calcs": [
-            "lastNotNull"
+            "last"
           ],
           "fields": "",
           "values": false
@@ -285,14 +291,104 @@
             "type": "prometheus",
             "uid": "P1809F7CD0C75ACF3"
           },
-          "exemplar": true,
-          "expr": "keepalived_vrrp_state ",
+          "exemplar": false,
+          "expr": "keepalived_vrrp_state {instance=\"vm1.lads.io:9165\"}",
+          "instant": true,
           "interval": "",
           "legendFormat": "{{job}}@{{instance}}",
           "refId": "A"
         }
       ],
-      "title": "DNS positions",
+      "title": "VM1 DNS",
+      "type": "stat"
+    },
+    {
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [
+            {
+              "options": {
+                "1": {
+                  "color": "yellow",
+                  "index": 1,
+                  "text": "SLAVE"
+                },
+                "2": {
+                  "color": "purple",
+                  "index": 0,
+                  "text": "MASTER"
+                }
+              },
+              "type": "value"
+            },
+            {
+              "options": {
+                "match": "null",
+                "result": {
+                  "color": "dark-red",
+                  "index": 2,
+                  "text": "DEAD"
+                }
+              },
+              "type": "special"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 8,
+        "x": 16,
+        "y": 5
+      },
+      "id": 25,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "last"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "8.3.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "P1809F7CD0C75ACF3"
+          },
+          "exemplar": false,
+          "expr": "keepalived_vrrp_state {instance=\"vm2.lads.io:9165\"}",
+          "instant": true,
+          "interval": "",
+          "legendFormat": "{{job}}@{{instance}}",
+          "refId": "A"
+        }
+      ],
+      "title": "VM2 DNS",
       "type": "stat"
     },
     {
@@ -420,7 +516,7 @@
         "h": 5,
         "w": 16,
         "x": 8,
-        "y": 11
+        "y": 10
       },
       "id": 21,
       "options": {
@@ -578,7 +674,7 @@
         "h": 3,
         "w": 8,
         "x": 8,
-        "y": 16
+        "y": 15
       },
       "id": 22,
       "options": {
@@ -655,7 +751,7 @@
         "h": 3,
         "w": 8,
         "x": 16,
-        "y": 16
+        "y": 15
       },
       "id": 24,
       "options": {
@@ -688,6 +784,168 @@
       ],
       "title": "VM2",
       "type": "stat"
+    },
+    {
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "ops"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 8,
+        "x": 9,
+        "y": 18
+      },
+      "id": 15,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single"
+        }
+      },
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "rate(influxdb_write_write_ok[5m])",
+          "interval": "",
+          "legendFormat": "{{instance}}",
+          "refId": "A"
+        }
+      ],
+      "title": "InfluxDB write rate",
+      "type": "timeseries"
+    },
+    {
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "ops"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 7,
+        "x": 17,
+        "y": 18
+      },
+      "id": 10,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single"
+        }
+      },
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "rate(bind_resolver_queries_total{type=~\"A|AAAA|NS|SRV\"}[5m])",
+          "interval": "",
+          "legendFormat": "{{instance}}: {{type}}",
+          "refId": "A"
+        }
+      ],
+      "title": "DNS query rate",
+      "type": "timeseries"
     },
     {
       "datasource": {
@@ -810,168 +1068,6 @@
       ],
       "title": "Ping",
       "type": "timeseries"
-    },
-    {
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 0,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "auto",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          },
-          "unit": "ops"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 7,
-        "w": 8,
-        "x": 9,
-        "y": 19
-      },
-      "id": 15,
-      "options": {
-        "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "bottom"
-        },
-        "tooltip": {
-          "mode": "single"
-        }
-      },
-      "targets": [
-        {
-          "exemplar": true,
-          "expr": "rate(influxdb_write_write_ok[5m])",
-          "interval": "",
-          "legendFormat": "{{instance}}",
-          "refId": "A"
-        }
-      ],
-      "title": "InfluxDB write rate",
-      "type": "timeseries"
-    },
-    {
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 0,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "auto",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          },
-          "unit": "ops"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 7,
-        "w": 7,
-        "x": 17,
-        "y": 19
-      },
-      "id": 10,
-      "options": {
-        "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "bottom"
-        },
-        "tooltip": {
-          "mode": "single"
-        }
-      },
-      "targets": [
-        {
-          "exemplar": true,
-          "expr": "rate(bind_resolver_queries_total{type=~\"A|AAAA|NS|SRV\"}[5m])",
-          "interval": "",
-          "legendFormat": "{{instance}}: {{type}}",
-          "refId": "A"
-        }
-      ],
-      "title": "DNS query rate",
-      "type": "timeseries"
     }
   ],
   "refresh": "5s",
@@ -989,6 +1085,6 @@
   "timezone": "",
   "title": "Main",
   "uid": "XUk2zhK7k",
-  "version": 3,
+  "version": 4,
   "weekStart": ""
 }
