@@ -1,7 +1,7 @@
 - name: Install bind9 exporter
   apt:
     name: prometheus-bind-exporter
-    update_cache: yes
+    # update_cache: yes
 
 - name: Verify bind9 exporter is running
   service:
