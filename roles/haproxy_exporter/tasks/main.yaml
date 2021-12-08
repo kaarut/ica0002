@@ -3,7 +3,6 @@
   apt:
     pkg: prometheus-haproxy-exporter
 
-
 - name: Change the default config
   template: 
     src: prometheus-haproxy-exporter

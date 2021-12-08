@@ -9,16 +9,16 @@
 - name: IPtables template
   template:
     src: iptables
-    dest: /var/local/iptables.mangle
+    dest: /etc/iptables/rules.v4
+
+- name: Iptables restore
+  community.general.iptables_state:
+    path: /etc/iptables/rules.v4
+    state: restored
+    table: mangle
 
 - name: Docker service
   service:
     name: docker
     state: started
     enabled: yes
-
-- name: Iptables restore
-  community.general.iptables_state:
-    path: /var/local/iptables.mangle
-    state: restored
-    table: mangle

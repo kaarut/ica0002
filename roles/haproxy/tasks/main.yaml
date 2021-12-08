@@ -3,13 +3,15 @@
   apt:  
     name: haproxy
 
-- name: Turn on both services
-  service: 
-    name: haproxy
-    state: started
-
 - name: Replace haproxy cfg
   template:
     src: haproxy.cfg.j2
     dest: /etc/haproxy/haproxy.cfg
   notify: restart haproxy
+
+- name: Turn on both services
+  service: 
+    name: haproxy
+    state: started
+    enabled: yes
+

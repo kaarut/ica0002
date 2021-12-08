@@ -29,4 +29,6 @@ listen my_ha_frontend
     stats enable
     stats uri /stats
     server docker1 vm1:81 check
-    server docker2 vm2:81 check
+    server docker2 vm2:82 check
+    server docker3 vm1:81 check
+    server docker4 vm2:82 check

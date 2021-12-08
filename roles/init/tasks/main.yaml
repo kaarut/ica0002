@@ -5,6 +5,7 @@
 - name: hostname
   hostname: 
     name: "{{inventory_hostname}}"
+    use: debian
 
 # - name: Debugging only
 #   debug:

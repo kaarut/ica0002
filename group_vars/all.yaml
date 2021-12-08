@@ -27,7 +27,7 @@ grafana_port: 3001
 agama_port: 81
 
 # MYSQL 
-mysql_host: vm2
+mysql_host: vm1
 mysql_database: agama
 mysql_user: agama
 mysql_password: !vault |
@@ -122,14 +122,18 @@ prometheus_jobs:
     port: 9424
     targets: "{{ groups['influxdb_servers'] }}"
 
+  - name: haproxy
+    port: 9101
+    targets: "{{ groups['haproxy'] }}"
+
+  - name: keepalived
+    port: 9165
+    targets: "{{ groups['web_servers'] }}"
 
 #DNS
 
 dns_a_records:
   backup: 192.168.42.156
-  cf: 1.1.1.1
-  google: 8.8.8.8
-  google2: 8.8.4.4
 
 dns_cname_records:
   grafana: "{{ groups['grafana_servers'][0] }}"
