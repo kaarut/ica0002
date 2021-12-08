@@ -3,9 +3,11 @@
     hosts: all
     become: yes
     gather_facts: yes
-    tasks:
-      - setup:
-
+    roles: 
+      - init
+      - node_exporter
+      - rsyslog
+   
   - name: DNS servers
     hosts: dns_servers
     become: yes
@@ -13,9 +15,13 @@
     roles: 
       - bind
       - bind_exporter
-      - dns_records
     tags: dns
-    
+ 
+  - name: DNS records
+    hosts: dns_master
+    roles: 
+      - dns_records
+
   - name: Init
     hosts: all
     become: yes
@@ -60,7 +66,6 @@
     hosts: all
     become: yes
     roles: 
-      - node_exporter
       - nginx
       - nginx_exporter
 
@@ -78,7 +83,6 @@
     gather_facts: no  
     roles: 
       - pinger
-      - rsyslog
     tags: log
   
   - name: influxdb_servers
