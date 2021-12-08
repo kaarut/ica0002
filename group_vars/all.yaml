@@ -128,7 +128,7 @@ prometheus_jobs:
 
   - name: keepalived
     port: 9165
-    targets: "{{ groups['web_servers'] }}"
+    targets: "{{ groups['dns_servers'] }}"
 
 #DNS
 

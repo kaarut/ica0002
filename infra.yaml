@@ -30,6 +30,7 @@
       - backup
       - docker
       - dns_resolve
+      - keepalived
     tags: init
 
   - name: Web server
@@ -41,7 +42,6 @@
       - nginx
       - haproxy
       - haproxy_exporter
-      - keepalived
     tags: web
 
   - name: Prometheus
