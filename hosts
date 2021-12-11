@@ -1,10 +1,11 @@
-vm1 ansible_host=193.40.156.86 ansible_port=7422 ansible_ssh_user=ubuntu
-vm2 ansible_host=193.40.156.86 ansible_port=10622 ansible_ssh_user=ubuntu
-vm3 ansible_host=193.40.156.86 ansible_port=9022 ansible_ssh_user=ubuntu
+vm1 ansible_host=193.40.156.86 ansible_port=7122 ansible_ssh_user=ubuntu
+vm2 ansible_host=193.40.156.86 ansible_port=15022 ansible_ssh_user=ubuntu
+vm3 ansible_host=193.40.156.86 ansible_port=16622 ansible_ssh_user=ubuntu
 
 [nodes]
 vm1
 vm2
+vm3
 
 [db_servers]
 vm1

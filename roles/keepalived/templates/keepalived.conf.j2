@@ -7,9 +7,9 @@ vrrp_instance agama {
     interface ens3
     virtual_router_id 1
     {% if inventory_hostname == 'vm1' %}
-    priority 100
+        priority 100
     {% else %}
-    priority 99
+        priority 99
     {% endif %}
     advert_int 1                            
     virtual_ipaddress {                     

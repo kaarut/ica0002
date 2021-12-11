@@ -7,6 +7,6 @@
     name: "{{inventory_hostname}}"
     use: debian
 
-# - name: Debugging only
-#   debug:
-#     msg: "{{ hostvars[inventory_hostname ]['ansible_default_ipv4']['address']}}"
+- name: Debugging only
+  debug:
+    msg: "{{ hostvars['vm1']['ansible_default_ipv4']['address'] }}"

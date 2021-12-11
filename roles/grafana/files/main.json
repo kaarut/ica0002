@@ -180,7 +180,7 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 4,
+        "h": 6,
         "w": 8,
         "x": 0,
         "y": 5
@@ -264,7 +264,7 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 5,
+        "h": 6,
         "w": 8,
         "x": 8,
         "y": 5
@@ -353,7 +353,7 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 5,
+        "h": 6,
         "w": 8,
         "x": 16,
         "y": 5
@@ -447,7 +447,7 @@
         "h": 5,
         "w": 8,
         "x": 0,
-        "y": 9
+        "y": 11
       },
       "id": 12,
       "options": {
@@ -482,18 +482,29 @@
           "mappings": [
             {
               "options": {
-                "0": {
-                  "color": "dark-red",
-                  "index": 1,
-                  "text": "DOWN"
-                },
                 "1": {
-                  "color": "semi-dark-blue",
+                  "color": "yellow",
+                  "index": 1,
+                  "text": "SLAVE"
+                },
+                "2": {
+                  "color": "purple",
                   "index": 0,
-                  "text": "UP"
+                  "text": "MASTER"
                 }
               },
               "type": "value"
+            },
+            {
+              "options": {
+                "match": "null",
+                "result": {
+                  "color": "dark-red",
+                  "index": 2,
+                  "text": "DEAD"
+                }
+              },
+              "type": "special"
             }
           ],
           "thresholds": {
@@ -516,17 +527,17 @@
         "h": 5,
         "w": 16,
         "x": 8,
-        "y": 10
+        "y": 11
       },
-      "id": 21,
+      "id": 26,
       "options": {
-        "colorMode": "background",
+        "colorMode": "value",
         "graphMode": "none",
         "justifyMode": "auto",
         "orientation": "auto",
         "reduceOptions": {
           "calcs": [
-            "lastNotNull"
+            "last"
           ],
           "fields": "",
           "values": false
@@ -540,14 +551,15 @@
             "type": "prometheus",
             "uid": "P1809F7CD0C75ACF3"
           },
-          "exemplar": true,
-          "expr": "haproxy_up",
+          "exemplar": false,
+          "expr": "keepalived_vrrp_state {instance=\"vm3.lads.io:9165\"}",
+          "instant": true,
           "interval": "",
           "legendFormat": "{{job}}@{{instance}}",
           "refId": "A"
         }
       ],
-      "title": "Haproxy status",
+      "title": "VM3 DNS",
       "type": "stat"
     },
     {
@@ -606,7 +618,7 @@
         "h": 5,
         "w": 8,
         "x": 0,
-        "y": 14
+        "y": 16
       },
       "id": 11,
       "options": {
@@ -629,6 +641,205 @@
         }
       ],
       "title": "MySQL query rate",
+      "type": "timeseries"
+    },
+    {
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [
+            {
+              "options": {
+                "0": {
+                  "color": "dark-red",
+                  "index": 1,
+                  "text": "DOWN"
+                },
+                "1": {
+                  "color": "semi-dark-blue",
+                  "index": 0,
+                  "text": "UP"
+                }
+              },
+              "type": "value"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 16,
+        "x": 8,
+        "y": 16
+      },
+      "id": 21,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "8.3.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "P1809F7CD0C75ACF3"
+          },
+          "exemplar": true,
+          "expr": "haproxy_up",
+          "interval": "",
+          "legendFormat": "{{job}}@{{instance}}",
+          "refId": "A"
+        }
+      ],
+      "title": "Haproxy status",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "P951FEA4DE68E13C5"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "ms"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 8,
+        "x": 0,
+        "y": 21
+      },
+      "id": 14,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single"
+        }
+      },
+      "targets": [
+        {
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "dst"
+              ],
+              "type": "tag"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "measurement": "latency",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "SELECT mean(\"rtt\") FROM \"latency\" WHERE (\"dst\" = 'cloudflare.com') AND $timeFilter GROUP BY time($__interval) fill(null)",
+          "rawQuery": false,
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "rtt"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": []
+        }
+      ],
+      "title": "Ping",
       "type": "timeseries"
     },
     {
@@ -674,7 +885,7 @@
         "h": 3,
         "w": 8,
         "x": 8,
-        "y": 15
+        "y": 21
       },
       "id": 22,
       "options": {
@@ -751,7 +962,7 @@
         "h": 3,
         "w": 8,
         "x": 16,
-        "y": 15
+        "y": 21
       },
       "id": 24,
       "options": {
@@ -838,10 +1049,10 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 7,
+        "h": 6,
         "w": 8,
-        "x": 9,
-        "y": 18
+        "x": 8,
+        "y": 24
       },
       "id": 15,
       "options": {
@@ -919,10 +1130,10 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 7,
-        "w": 7,
-        "x": 17,
-        "y": 18
+        "h": 6,
+        "w": 8,
+        "x": 16,
+        "y": 24
       },
       "id": 10,
       "options": {
@@ -946,128 +1157,6 @@
       ],
       "title": "DNS query rate",
       "type": "timeseries"
-    },
-    {
-      "datasource": {
-        "type": "influxdb",
-        "uid": "P951FEA4DE68E13C5"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 0,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "auto",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          },
-          "unit": "ms"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 7,
-        "w": 9,
-        "x": 0,
-        "y": 19
-      },
-      "id": 14,
-      "options": {
-        "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "bottom"
-        },
-        "tooltip": {
-          "mode": "single"
-        }
-      },
-      "targets": [
-        {
-          "groupBy": [
-            {
-              "params": [
-                "$__interval"
-              ],
-              "type": "time"
-            },
-            {
-              "params": [
-                "dst"
-              ],
-              "type": "tag"
-            },
-            {
-              "params": [
-                "null"
-              ],
-              "type": "fill"
-            }
-          ],
-          "measurement": "latency",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "query": "SELECT mean(\"rtt\") FROM \"latency\" WHERE (\"dst\" = 'cloudflare.com') AND $timeFilter GROUP BY time($__interval) fill(null)",
-          "rawQuery": false,
-          "refId": "A",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "rtt"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "mean"
-              }
-            ]
-          ],
-          "tags": []
-        }
-      ],
-      "title": "Ping",
-      "type": "timeseries"
     }
   ],
   "refresh": "5s",
@@ -1085,6 +1174,6 @@
   "timezone": "",
   "title": "Main",
   "uid": "XUk2zhK7k",
-  "version": 4,
+  "version": 1,
   "weekStart": ""
 }

@@ -6,7 +6,7 @@ datasources:
     type: influxdb
     access: proxy
     orgId: 1
-    url: http://vm2:8086
+    url: http://{{ influxdb_host }}:8086
     password:
     user:
     database: latency

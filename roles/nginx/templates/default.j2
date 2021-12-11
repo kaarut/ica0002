@@ -46,7 +46,7 @@ server {
     {% if inventory_hostname in groups['prometheus'] %}
     location /prometheus
         {
-            proxy_pass http://localhost:9090;
+            proxy_pass http://localhost:{{ prometheus_port }};
         }
     {% endif %}
 
@@ -57,7 +57,7 @@ server {
         }
 
     # InfluxDB
-    {% if inventory_hostname in groups['db_servers'] %}
+    {% if inventory_hostname in groups['influxdb_servers'] %}
     location /influxdb-metrics
         {
             proxy_pass http://localhost:9424/metrics;
@@ -76,7 +76,6 @@ server {
             proxy_pass http://localhost:9165/metrics;
         }
     {% endif %}
-
 }
 
 server {

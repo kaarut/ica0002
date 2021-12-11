@@ -27,21 +27,20 @@
     become: yes
     roles: 
       - init
-      - backup
-      - docker
       - dns_resolve
-      - keepalived
     tags: init
 
   - name: Web server
     hosts: web_servers
     become: yes
     roles:
+      - docker
       - agama
       # - uwsgi
       - nginx
       - haproxy
       - haproxy_exporter
+      - keepalived
     tags: web
 
   - name: Prometheus
@@ -60,6 +59,7 @@
       - mysql
       - mysql_exporter
       - mysql_backup
+      - backup
     tags: db
   
   - name: Exporters
@@ -74,6 +74,7 @@
     become: yes
     gather_facts: no
     roles: 
+      - docker
       - grafana
     tags: g
 
@@ -89,7 +90,8 @@
     hosts: influxdb_servers
     become: yes
     roles:
-        - influxdb
-        - influxdb_backup
-        - influxdb_exporter
+      - influxdb
+      - influxdb_backup
+      - influxdb_exporter
+      - backup
     tags: db

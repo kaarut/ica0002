@@ -1,4 +1,3 @@
-acl corpnets { {{ localnetwork }}; {{ localhost }}; };
 options {
 	directory "/var/cache/bind";
 
@@ -9,12 +8,7 @@ options {
 	};
 
 	dnssec-validation no;
-
-	allow-query { 
-		{{ localhost_address }}; 
-		{{ localnetwork }}; 
-		{{ docker_network}}; 
-    };
+	allow-query { {{ localhost_address }}; {{ localnetwork }}; {{docker_network}}; };
 };
 
 statistics-channels {

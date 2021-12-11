@@ -4,6 +4,8 @@ fqdn: lads.io
 reverse_fqdn: 42.168.192.in-addr.arpa
 nginx_container_per_vm: 2
 
+docker_agama_port: 8000
+
 #BIND
 localnetwork: 192.168.42.0/24
 docker_network: 172.17.0.0/16
@@ -11,23 +13,25 @@ localhost: 127.0.0.0/8
 localhost_address: 127.0.0.1
 
 # PROMETHEUS
-prometheus_host: vm1
+prometheus_host: "{{ groups['prometheus'][0] }}"
+prometheus_port: 9090
 
 # INFLUX_DB
-influxdb_host: vm2
+influxdb_host: "{{ groups['influxdb_servers'][0] }}"
+infuxdb_port: 
 
 # LOGGING
 rsyslog_host: vm2
 
 # GRAFANA
-grafana_host: vm1
+grafana_host: "{{ groups['grafana_servers'][0] }}"
 grafana_port: 3001
 
 # Agama
 agama_port: 81
 
 # MYSQL 
-mysql_host: vm1
+mysql_host: "{{ hostvars['vm1']['ansible_default_ipv4']['address'] }}"
 mysql_database: agama
 mysql_user: agama
 mysql_password: !vault |
@@ -45,10 +49,6 @@ forwarders:
   - 8.8.8.8
   - 9.9.9.9
   - 9.9.9.10
-
-acl:
-  - 192.168.42.0/24
-  - 127.0.0.0/8
 
 mysql_exporter: !vault |
           $ANSIBLE_VAULT;1.1;AES256
@@ -131,7 +131,6 @@ prometheus_jobs:
     targets: "{{ groups['dns_servers'] }}"
 
 #DNS
-
 dns_a_records:
   backup: 192.168.42.156
 

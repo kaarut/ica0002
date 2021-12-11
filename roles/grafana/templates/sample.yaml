@@ -5,7 +5,7 @@ datasources:
     type: prometheus
     access: proxy
     orgId: 1
-    url: http://vm1:9090/prometheus
+    url: http://{{ prometheus_host }}:9090/prometheus
     password:
     user:
     database:
