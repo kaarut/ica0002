@@ -21,7 +21,7 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 1,
+  "id": 2,
   "links": [
     {
       "asDropdown": false,
@@ -54,7 +54,7 @@
                 "0": {
                   "color": "red",
                   "index": 1,
-                  "text": "‼️"
+                  "text": "FAILED"
                 },
                 "1": {
                   "color": "green",
@@ -106,7 +106,7 @@
         "text": {},
         "textMode": "value"
       },
-      "pluginVersion": "8.3.0",
+      "pluginVersion": "8.3.2",
       "targets": [
         {
           "exemplar": true,
@@ -170,7 +170,7 @@
         "text": {},
         "textMode": "value"
       },
-      "pluginVersion": "8.3.0",
+      "pluginVersion": "8.3.2",
       "targets": [
         {
           "exemplar": true,
@@ -250,7 +250,7 @@
         "text": {},
         "textMode": "value"
       },
-      "pluginVersion": "8.3.0",
+      "pluginVersion": "8.3.2",
       "targets": [
         {
           "exemplar": true,
@@ -330,7 +330,7 @@
         "text": {},
         "textMode": "value"
       },
-      "pluginVersion": "8.3.0",
+      "pluginVersion": "8.3.2",
       "targets": [
         {
           "exemplar": true,
@@ -410,7 +410,7 @@
         "text": {},
         "textMode": "value"
       },
-      "pluginVersion": "8.3.0",
+      "pluginVersion": "8.3.2",
       "targets": [
         {
           "exemplar": true,

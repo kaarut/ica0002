@@ -1,5 +1,5 @@
 ---
-- name: Install haproxy & keepalived
+- name: Install haproxy 
   apt:  
     name: haproxy
 
@@ -9,9 +9,8 @@
     dest: /etc/haproxy/haproxy.cfg
   notify: restart haproxy
 
-- name: Turn on both services
+- name: Turn on haproxy
   service: 
     name: haproxy
     state: started
     enabled: yes
-

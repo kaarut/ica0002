@@ -68,6 +68,7 @@
     roles: 
       - nginx
       - nginx_exporter
+    tags: ex
 
   - name: Grafana
     hosts: grafana_servers
@@ -94,4 +95,5 @@
       - influxdb_backup
       - influxdb_exporter
       - backup
-    tags: db
+    tags: influx
+    

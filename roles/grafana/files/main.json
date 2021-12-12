@@ -21,7 +21,6 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 1,
   "links": [
     {
       "asDropdown": false,
@@ -101,7 +100,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.3.1",
+      "pluginVersion": "8.3.2",
       "targets": [
         {
           "datasource": {
@@ -200,7 +199,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "8.3.1",
+      "pluginVersion": "8.3.2",
       "targets": [
         {
           "exemplar": true,
@@ -284,7 +283,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "8.3.1",
+      "pluginVersion": "8.3.2",
       "targets": [
         {
           "datasource": {
@@ -299,7 +298,7 @@
           "refId": "A"
         }
       ],
-      "title": "VM1 DNS",
+      "title": "VM1 KEEPALIVED STATUS",
       "type": "stat"
     },
     {
@@ -373,7 +372,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "8.3.1",
+      "pluginVersion": "8.3.2",
       "targets": [
         {
           "datasource": {
@@ -388,7 +387,7 @@
           "refId": "A"
         }
       ],
-      "title": "VM2 DNS",
+      "title": "VM2 KEEPALIVED STATUS",
       "type": "stat"
     },
     {
@@ -482,29 +481,18 @@
           "mappings": [
             {
               "options": {
-                "1": {
-                  "color": "yellow",
+                "0": {
+                  "color": "dark-red",
                   "index": 1,
-                  "text": "SLAVE"
+                  "text": "DOWN"
                 },
-                "2": {
-                  "color": "purple",
+                "1": {
+                  "color": "semi-dark-blue",
                   "index": 0,
-                  "text": "MASTER"
+                  "text": "UP"
                 }
               },
               "type": "value"
-            },
-            {
-              "options": {
-                "match": "null",
-                "result": {
-                  "color": "dark-red",
-                  "index": 2,
-                  "text": "DEAD"
-                }
-              },
-              "type": "special"
             }
           ],
           "thresholds": {
@@ -529,37 +517,36 @@
         "x": 8,
         "y": 11
       },
-      "id": 26,
+      "id": 21,
       "options": {
-        "colorMode": "value",
+        "colorMode": "background",
         "graphMode": "none",
         "justifyMode": "auto",
         "orientation": "auto",
         "reduceOptions": {
           "calcs": [
-            "last"
+            "lastNotNull"
           ],
           "fields": "",
           "values": false
         },
         "textMode": "auto"
       },
-      "pluginVersion": "8.3.1",
+      "pluginVersion": "8.3.2",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
             "uid": "P1809F7CD0C75ACF3"
           },
-          "exemplar": false,
-          "expr": "keepalived_vrrp_state {instance=\"vm3.lads.io:9165\"}",
-          "instant": true,
+          "exemplar": true,
+          "expr": "haproxy_up",
           "interval": "",
           "legendFormat": "{{job}}@{{instance}}",
           "refId": "A"
         }
       ],
-      "title": "VM3 DNS",
+      "title": "Haproxy status",
       "type": "stat"
     },
     {
@@ -658,9 +645,86 @@
                   "text": "DOWN"
                 },
                 "1": {
-                  "color": "semi-dark-blue",
+                  "color": "super-light-yellow",
                   "index": 0,
-                  "text": "UP"
+                  "text": "🐥"
+                }
+              },
+              "type": "value"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "light-yellow",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 8,
+        "x": 8,
+        "y": 16
+      },
+      "id": 22,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "8.3.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "P1809F7CD0C75ACF3"
+          },
+          "exemplar": true,
+          "expr": "haproxy_server_up {instance=\"vm1.lads.io:9101\"}",
+          "interval": "",
+          "legendFormat": "{{server}}",
+          "refId": "A"
+        }
+      ],
+      "title": "VM1",
+      "type": "stat"
+    },
+    {
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [
+            {
+              "options": {
+                "0": {
+                  "color": "dark-red",
+                  "index": 1,
+                  "text": "DOWN"
+                },
+                "1": {
+                  "color": "super-light-yellow",
+                  "index": 0,
+                  "text": "🐥"
                 }
               },
               "type": "value"
@@ -684,11 +748,11 @@
       },
       "gridPos": {
         "h": 5,
-        "w": 16,
-        "x": 8,
+        "w": 8,
+        "x": 16,
         "y": 16
       },
-      "id": 21,
+      "id": 24,
       "options": {
         "colorMode": "background",
         "graphMode": "none",
@@ -703,7 +767,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "8.3.1",
+      "pluginVersion": "8.3.2",
       "targets": [
         {
           "datasource": {
@@ -711,13 +775,13 @@
             "uid": "P1809F7CD0C75ACF3"
           },
           "exemplar": true,
-          "expr": "haproxy_up",
+          "expr": "haproxy_server_up {instance=\"vm2.lads.io:9101\"}",
           "interval": "",
-          "legendFormat": "{{job}}@{{instance}}",
+          "legendFormat": "{{server}}",
           "refId": "A"
         }
       ],
-      "title": "Haproxy status",
+      "title": "VM2",
       "type": "stat"
     },
     {
@@ -777,7 +841,7 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 8,
+        "h": 9,
         "w": 8,
         "x": 0,
         "y": 21
@@ -846,160 +910,6 @@
       "fieldConfig": {
         "defaults": {
           "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [
-            {
-              "options": {
-                "0": {
-                  "color": "dark-red",
-                  "index": 1,
-                  "text": "DOWN"
-                },
-                "1": {
-                  "color": "super-light-yellow",
-                  "index": 0,
-                  "text": "🐥"
-                }
-              },
-              "type": "value"
-            }
-          ],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "light-yellow",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 3,
-        "w": 8,
-        "x": 8,
-        "y": 21
-      },
-      "id": 22,
-      "options": {
-        "colorMode": "background",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "textMode": "auto"
-      },
-      "pluginVersion": "8.3.1",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "P1809F7CD0C75ACF3"
-          },
-          "exemplar": true,
-          "expr": "haproxy_server_up {instance=\"vm1.lads.io:9101\"}",
-          "interval": "",
-          "legendFormat": "{{server}}",
-          "refId": "A"
-        }
-      ],
-      "title": "VM1",
-      "type": "stat"
-    },
-    {
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [
-            {
-              "options": {
-                "0": {
-                  "color": "dark-red",
-                  "index": 1,
-                  "text": "DOWN"
-                },
-                "1": {
-                  "color": "super-light-yellow",
-                  "index": 0,
-                  "text": "🐥"
-                }
-              },
-              "type": "value"
-            }
-          ],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 3,
-        "w": 8,
-        "x": 16,
-        "y": 21
-      },
-      "id": 24,
-      "options": {
-        "colorMode": "background",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "textMode": "auto"
-      },
-      "pluginVersion": "8.3.1",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "P1809F7CD0C75ACF3"
-          },
-          "exemplar": true,
-          "expr": "haproxy_server_up {instance=\"vm2.lads.io:9101\"}",
-          "interval": "",
-          "legendFormat": "{{server}}",
-          "refId": "A"
-        }
-      ],
-      "title": "VM2",
-      "type": "stat"
-    },
-    {
-      "fieldConfig": {
-        "defaults": {
-          "color": {
             "mode": "palette-classic"
           },
           "custom": {
@@ -1049,10 +959,10 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 6,
+        "h": 9,
         "w": 8,
         "x": 8,
-        "y": 24
+        "y": 21
       },
       "id": 15,
       "options": {
@@ -1130,10 +1040,10 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 6,
+        "h": 9,
         "w": 8,
         "x": 16,
-        "y": 24
+        "y": 21
       },
       "id": 10,
       "options": {

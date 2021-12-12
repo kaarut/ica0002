@@ -40,7 +40,7 @@
 - name: Read only ON/OFF
   community.mysql.mysql_variables:
     variable: read_only
-    value: "{{ 'OFF' if inventory_hostname == mysql_host else 'ON' }}"
+    value: "{{ 'OFF' if inventory_hostname == mysql_master else 'ON' }}"
     mode: persist
     login_unix_socket: /var/run/mysqld/mysqld.sock 
   notify:

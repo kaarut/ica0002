@@ -31,8 +31,8 @@
     src: pinger.service.j2
     dest: /etc/systemd/system/pinger.service
   notify: 
-    - restart pinger
     - daemon-reload
+    - restart pinger
 
 - name: Start & enable the pinger if not started
   service: 

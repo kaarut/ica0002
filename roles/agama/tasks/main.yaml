@@ -26,7 +26,7 @@
     image: agama
     env:
       AGAMA_DATABASE_URI: mysql+pymysql://{{ mysql_user }}:{{ mysql_password }}@{{ mysql_host }}/{{ mysql_database }}
-    published_ports: "81:8000"
+    published_ports: "8001:{{ agama_port }}"
     container_default_behavior: no_defaults 
     restart_policy: always
 
@@ -36,6 +36,6 @@
     image: agama
     env:
       AGAMA_DATABASE_URI: mysql+pymysql://{{ mysql_user }}:{{ mysql_password }}@{{ mysql_host }}/{{ mysql_database }}
-    published_ports: "82:8000"
+    published_ports: "8002:{{ agama_port }}"
     container_default_behavior: no_defaults 
     restart_policy: always
