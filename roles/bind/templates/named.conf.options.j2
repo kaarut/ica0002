@@ -1,14 +1,13 @@
-acl corpnets { {{ localnetwork }}; {{ localhost }}; };
+acl corpnets { {{ localnetwork }}; {{ localhost }}; {{docker_network}}; };
 
 options {
 	directory "/var/cache/bind";
-	forwarders {
-    {% for ip in forwarders %} 
-        {{ ip }};
-    {% endfor %}
-	};
+	
+	forwarders { {% for ip in forwarders %} {{ ip }};{% endfor %} };
 
-	allow-query { {{ localhost_address }}; {{ localnetwork }}; {{docker_network}}; };
+	allow-query { 
+		corpnets; 
+	};
 	dnssec-validation no;
 };
 

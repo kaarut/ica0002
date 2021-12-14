@@ -24,7 +24,7 @@
   when: inventory_hostname in groups['dns_master']
   template: 
     src: db.domain.reverse
-    dest: /var/cache/bind/db.reverse
+    dest: /var/cache/bind/db.{{ reverse_fqdn }}
     force: no
   notify: reload rndc
 

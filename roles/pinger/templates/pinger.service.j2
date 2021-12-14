@@ -1,12 +1,11 @@
 [Unit]
-Description=Pinger service
+Description=Latency measurement tool
+Documentation=https://github.com/romankuchin/ica0002-2021/blob/main/08-logging/lab.md
+After=network-online.target
 
 [Service]
-Restart=always
-RestartSec=1
 User=pinger
 ExecStart=/usr/local/bin/pinger
 
 [Install]
 WantedBy=multi-user.target
-
