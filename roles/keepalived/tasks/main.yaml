@@ -3,6 +3,12 @@
   apt:  
     name: keepalived
     
+- name: Add the user keepalived_script
+  user:
+    name: keepaliver
+    home: /home/keepaliver
+    shell: /bin/bash
+
 - name: Replace keepalived conf
   template:
     src: keepalived.conf.j2
@@ -12,8 +18,8 @@
 - name: Add the script
   template:
     src: keepalived_script.j2
-    dest: /usr/local/bin/keepalived_script
-    mode: 755
+    dest: /home/keepaliver/keepalived_script
+    owner: keepaliver
 
 - name: Install keepalived monitoring
   unarchive:

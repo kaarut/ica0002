@@ -1,4 +1,4 @@
-Tue Dec 14 19:24:51 EET 2021
+Tue Dec 14 20:33:51 EET 2021
 + hostname
 MBP-H8D.local
 + ansible-playbook infra.yaml --diff
@@ -1629,4 +1629,4 @@ vm2                        : ok=78   changed=0    unreachable=0    failed=0    s
 vm3                        : ok=67   changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
 
 + date
-Tue Dec 14 19:36:00 EET 2021
+Tue Dec 14 23:43:00 EET 2021
