@@ -1,4 +1,4 @@
-Tue Dec 14 20:33:51 EET 2021
+Tue Dec 14 20:43:37 EET 2021
 + hostname
 MBP-H8D.local
 + ansible-playbook infra.yaml --diff
@@ -6,9 +6,9 @@ MBP-H8D.local
 PLAY [Setup] *******************************************************************
 
 TASK [Gathering Facts] *********************************************************
-ok: [vm3]
-ok: [vm2]
 ok: [vm1]
+ok: [vm2]
+ok: [vm3]
 
 TASK [init : Update APT cache] *************************************************
 ok: [vm1]
@@ -17,8 +17,8 @@ ok: [vm2]
 
 TASK [init : hostname] *********************************************************
 ok: [vm2]
-ok: [vm3]
 ok: [vm1]
+ok: [vm3]
 
 TASK [init : Debugging only] ***************************************************
 ok: [vm1] => {
@@ -38,23 +38,23 @@ ok: [vm3]
 
 TASK [node_exporter : Enable node exporter] ************************************
 ok: [vm3]
-ok: [vm2]
 ok: [vm1]
+ok: [vm2]
 
 TASK [rsyslog : Install Rsyslog] ***********************************************
 ok: [vm1]
-ok: [vm2]
 ok: [vm3]
+ok: [vm2]
 
 TASK [rsyslog : config rsyslog] ************************************************
 ok: [vm2]
-ok: [vm3]
 ok: [vm1]
+ok: [vm3]
 
 TASK [rsyslog : start rsyslog] *************************************************
 ok: [vm1]
-ok: [vm3]
 ok: [vm2]
+ok: [vm3]
 
 PLAY [DNS servers] *************************************************************
 
@@ -65,13 +65,13 @@ ok: [vm2]
 
 TASK [bind : Install bind9] ****************************************************
 ok: [vm1]
-ok: [vm3]
 ok: [vm2]
+ok: [vm3]
 
 TASK [bind : Installing the options] *******************************************
-ok: [vm3]
-ok: [vm2]
 ok: [vm1]
+ok: [vm2]
+ok: [vm3]
 
 TASK [bind : Installing the db.domain] *****************************************
 skipping: [vm1]
@@ -84,19 +84,19 @@ skipping: [vm2]
 ok: [vm3]
 
 TASK [bind : Installing the local] *********************************************
+ok: [vm3]
 ok: [vm1]
 ok: [vm2]
-ok: [vm3]
 
 TASK [bind : Verify bind9 is running] ******************************************
-ok: [vm3]
 ok: [vm1]
 ok: [vm2]
+ok: [vm3]
 
 TASK [bind_exporter : Install bind9 exporter] **********************************
+ok: [vm1]
 ok: [vm2]
 ok: [vm3]
-ok: [vm1]
 
 TASK [bind_exporter : Verify bind9 exporter is running] ************************
 ok: [vm1]
@@ -127,8 +127,8 @@ PLAY [Init] ********************************************************************
 
 TASK [Gathering Facts] *********************************************************
 ok: [vm1]
-ok: [vm3]
 ok: [vm2]
+ok: [vm3]
 
 TASK [init : Update APT cache] *************************************************
 ok: [vm1]
@@ -152,23 +152,23 @@ ok: [vm3] => {
 }
 
 TASK [dns_resolve : replace with new resolv file] ******************************
-ok: [vm2]
 ok: [vm1]
+ok: [vm2]
 ok: [vm3]
 
 PLAY [Web server] **************************************************************
 
 TASK [Gathering Facts] *********************************************************
-ok: [vm1]
 ok: [vm2]
+ok: [vm1]
 
 TASK [docker : Docker package] *************************************************
 ok: [vm1]
 ok: [vm2]
 
 TASK [docker : IPtables template] **********************************************
-ok: [vm1]
 ok: [vm2]
+ok: [vm1]
 
 TASK [docker : Iptables restore] ***********************************************
 [WARNING]: Attempts to restore iptables state without rollback in case of
@@ -185,8 +185,8 @@ ok: [vm2]
 ok: [vm1]
 
 TASK [docker : Docker service] *************************************************
-ok: [vm1]
 ok: [vm2]
+ok: [vm1]
 
 TASK [agama : Linux user agama] ************************************************
 ok: [vm1]
@@ -201,16 +201,16 @@ ok: [vm2]
 ok: [vm1]
 
 TASK [agama : Build Agama image] ***********************************************
-ok: [vm2]
 ok: [vm1]
+ok: [vm2]
 
 TASK [agama : Agama container] *************************************************
-ok: [vm2]
 ok: [vm1]
+ok: [vm2]
 
 TASK [agama : Agama container 2] ***********************************************
-ok: [vm2]
 ok: [vm1]
+ok: [vm2]
 
 TASK [nginx : Installing Nginx package] ****************************************
 ok: [vm1]
@@ -225,12 +225,12 @@ ok: [vm1]
 ok: [vm2]
 
 TASK [haproxy : Install haproxy] ***********************************************
-ok: [vm2]
 ok: [vm1]
+ok: [vm2]
 
 TASK [haproxy : Replace haproxy cfg] *******************************************
-ok: [vm2]
 ok: [vm1]
+ok: [vm2]
 
 TASK [haproxy : Turn on haproxy] ***********************************************
 ok: [vm2]
@@ -257,18 +257,18 @@ ok: [vm1]
 ok: [vm2]
 
 TASK [keepalived : Install keepalived monitoring] ******************************
-ok: [vm1]
 ok: [vm2]
+ok: [vm1]
 
 TASK [keepalived : Create keepalived_monitor] **********************************
 ok: [vm2]
 ok: [vm1]
 
 TASK [keepalived : Start "{{ item }}"] *****************************************
-ok: [vm1] => (item=keepalived)
 ok: [vm2] => (item=keepalived)
-ok: [vm1] => (item=keepalived_monitor)
+ok: [vm1] => (item=keepalived)
 ok: [vm2] => (item=keepalived_monitor)
+ok: [vm1] => (item=keepalived_monitor)
 
 PLAY [Prometheus] **************************************************************
 
@@ -295,8 +295,8 @@ ok: [vm1]
 ok: [vm2]
 
 TASK [mysql : start mysql server] **********************************************
-ok: [vm1]
 ok: [vm2]
+ok: [vm1]
 
 TASK [mysql : MySQL database for Agama] ****************************************
 ok: [vm1]
@@ -311,16 +311,16 @@ ok: [vm1]
 ok: [vm2]
 
 TASK [mysql : Read only ON/OFF] ************************************************
-ok: [vm1]
 ok: [vm2]
+ok: [vm1]
 
 TASK [mysql_exporter : MySQL user] *********************************************
-ok: [vm2]
 ok: [vm1]
+ok: [vm2]
 
 TASK [mysql_exporter : Create config] ******************************************
-ok: [vm2]
 ok: [vm1]
+ok: [vm2]
 
 TASK [mysql_exporter : Install mysqld exporter] ********************************
 ok: [vm1]
@@ -335,8 +335,8 @@ ok: [vm1]
 ok: [vm2]
 
 TASK [mysql_backup : create directory] *****************************************
-ok: [vm2]
 ok: [vm1]
+ok: [vm2]
 
 TASK [mysql_backup : Replace mysql conf file] **********************************
 ok: [vm1]
@@ -355,8 +355,8 @@ ok: [vm1]
 ok: [vm2]
 
 TASK [backup : ansible create directory] ***************************************
-ok: [vm2]
 ok: [vm1]
+ok: [vm2]
 
 TASK [backup : Install duplicity] **********************************************
 ok: [vm1]
@@ -374,19 +374,19 @@ ok: [vm2]
 ok: [vm3]
 
 TASK [nginx : Installing Nginx package] ****************************************
-ok: [vm1]
 ok: [vm2]
 ok: [vm3]
+ok: [vm1]
 
 TASK [nginx : Replace the default Nginx conf file] *****************************
 ok: [vm1]
-ok: [vm2]
 ok: [vm3]
+ok: [vm2]
 
 TASK [nginx : start nginx] *****************************************************
-ok: [vm1]
 ok: [vm2]
 ok: [vm3]
+ok: [vm1]
 
 TASK [nginx_exporter : Install nginx-exporter] *********************************
 ok: [vm1]
@@ -394,8 +394,8 @@ ok: [vm2]
 ok: [vm3]
 
 TASK [nginx_exporter : Verify exporter is running] *****************************
-ok: [vm2]
 ok: [vm1]
+ok: [vm2]
 ok: [vm3]
 
 PLAY [Grafana] *****************************************************************
@@ -444,20 +444,20 @@ ok: [vm3]
 PLAY [Loggers] *****************************************************************
 
 TASK [pinger : Install fping] **************************************************
-ok: [vm2]
 ok: [vm1]
+ok: [vm2]
 
 TASK [pinger : Add the user "pinger" and generate keys] ************************
-ok: [vm2]
 ok: [vm1]
+ok: [vm2]
 
 TASK [pinger : Copy pinger conf] ***********************************************
-ok: [vm2]
 ok: [vm1]
+ok: [vm2]
 
 TASK [pinger : Copy the pinger.sh] *********************************************
-ok: [vm2]
 ok: [vm1]
+ok: [vm2]
 
 TASK [pinger : Create a pinger.service] ****************************************
 ok: [vm1]
@@ -548,14 +548,14 @@ ok: [vm3]
 ok: [vm2]
 
 TASK [init : Update APT cache] *************************************************
-ok: [vm2]
 ok: [vm1]
+ok: [vm2]
 ok: [vm3]
 
 TASK [init : hostname] *********************************************************
-ok: [vm1]
 ok: [vm2]
 ok: [vm3]
+ok: [vm1]
 
 TASK [init : Debugging only] ***************************************************
 ok: [vm1] => {
@@ -569,8 +569,8 @@ ok: [vm3] => {
 }
 
 TASK [node_exporter : Install APT package] *************************************
-ok: [vm1]
 ok: [vm2]
+ok: [vm1]
 ok: [vm3]
 
 TASK [node_exporter : Enable node exporter] ************************************
@@ -585,8 +585,8 @@ ok: [vm3]
 
 TASK [rsyslog : config rsyslog] ************************************************
 ok: [vm2]
-ok: [vm3]
 ok: [vm1]
+ok: [vm3]
 
 TASK [rsyslog : start rsyslog] *************************************************
 ok: [vm1]
@@ -596,19 +596,19 @@ ok: [vm3]
 PLAY [DNS servers] *************************************************************
 
 TASK [Gathering Facts] *********************************************************
-ok: [vm1]
 ok: [vm3]
+ok: [vm1]
 ok: [vm2]
 
 TASK [bind : Install bind9] ****************************************************
 ok: [vm1]
-ok: [vm3]
 ok: [vm2]
+ok: [vm3]
 
 TASK [bind : Installing the options] *******************************************
-ok: [vm3]
 ok: [vm1]
 ok: [vm2]
+ok: [vm3]
 
 TASK [bind : Installing the db.domain] *****************************************
 skipping: [vm1]
@@ -636,9 +636,9 @@ ok: [vm2]
 ok: [vm3]
 
 TASK [bind_exporter : Verify bind9 exporter is running] ************************
-ok: [vm2]
-ok: [vm1]
 ok: [vm3]
+ok: [vm1]
+ok: [vm2]
 
 PLAY [DNS records] *************************************************************
 
@@ -668,14 +668,14 @@ ok: [vm2]
 ok: [vm3]
 
 TASK [init : Update APT cache] *************************************************
-ok: [vm1]
 ok: [vm2]
 ok: [vm3]
+ok: [vm1]
 
 TASK [init : hostname] *********************************************************
-ok: [vm1]
 ok: [vm2]
 ok: [vm3]
+ok: [vm1]
 
 TASK [init : Debugging only] ***************************************************
 ok: [vm1] => {
@@ -689,15 +689,15 @@ ok: [vm3] => {
 }
 
 TASK [dns_resolve : replace with new resolv file] ******************************
-ok: [vm1]
 ok: [vm2]
 ok: [vm3]
+ok: [vm1]
 
 PLAY [Web server] **************************************************************
 
 TASK [Gathering Facts] *********************************************************
-ok: [vm2]
 ok: [vm1]
+ok: [vm2]
 
 TASK [docker : Docker package] *************************************************
 ok: [vm1]
@@ -718,8 +718,8 @@ mistake may lead the ansible controller to loose access to the hosts and never
 regain it before fixing firewall rules through a serial console, or any other
 way except SSH. Please set task attribute 'poll' (=15) to 0, and 'async' (=0)
 to a value >2 and not greater than 'ansible_timeout' (=10) (recommended).
-ok: [vm2]
 ok: [vm1]
+ok: [vm2]
 
 TASK [docker : Docker service] *************************************************
 ok: [vm1]
@@ -734,8 +734,8 @@ ok: [vm2]
 ok: [vm1]
 
 TASK [agama : Download the app] ************************************************
-ok: [vm2]
 ok: [vm1]
+ok: [vm2]
 
 TASK [agama : Build Agama image] ***********************************************
 ok: [vm1]
@@ -746,8 +746,8 @@ ok: [vm2]
 ok: [vm1]
 
 TASK [agama : Agama container 2] ***********************************************
-ok: [vm2]
 ok: [vm1]
+ok: [vm2]
 
 TASK [nginx : Installing Nginx package] ****************************************
 ok: [vm1]
@@ -762,8 +762,8 @@ ok: [vm1]
 ok: [vm2]
 
 TASK [haproxy : Install haproxy] ***********************************************
-ok: [vm2]
 ok: [vm1]
+ok: [vm2]
 
 TASK [haproxy : Replace haproxy cfg] *******************************************
 ok: [vm1]
@@ -786,24 +786,24 @@ ok: [vm1]
 ok: [vm2]
 
 TASK [keepalived : Replace keepalived conf] ************************************
-ok: [vm1]
 ok: [vm2]
+ok: [vm1]
 
 TASK [keepalived : Add the script] *********************************************
-ok: [vm1]
 ok: [vm2]
+ok: [vm1]
 
 TASK [keepalived : Install keepalived monitoring] ******************************
-ok: [vm1]
 ok: [vm2]
+ok: [vm1]
 
 TASK [keepalived : Create keepalived_monitor] **********************************
-ok: [vm1]
 ok: [vm2]
+ok: [vm1]
 
 TASK [keepalived : Start "{{ item }}"] *****************************************
-ok: [vm2] => (item=keepalived)
 ok: [vm1] => (item=keepalived)
+ok: [vm2] => (item=keepalived)
 ok: [vm1] => (item=keepalived_monitor)
 ok: [vm2] => (item=keepalived_monitor)
 
@@ -824,24 +824,24 @@ ok: [vm3]
 PLAY [MYSQL servers] ***********************************************************
 
 TASK [mysql : Install MYSQL-server] ********************************************
-ok: [vm1]
 ok: [vm2]
+ok: [vm1]
 
 TASK [mysql : Replace the default mysql conf file] *****************************
 ok: [vm1]
 ok: [vm2]
 
 TASK [mysql : start mysql server] **********************************************
-ok: [vm2]
 ok: [vm1]
+ok: [vm2]
 
 TASK [mysql : MySQL database for Agama] ****************************************
-ok: [vm2]
 ok: [vm1]
+ok: [vm2]
 
 TASK [mysql : MySQL user for Agama] ********************************************
-ok: [vm1]
 ok: [vm2]
+ok: [vm1]
 
 TASK [mysql : MySQL user for replication] **************************************
 ok: [vm1]
@@ -856,16 +856,16 @@ ok: [vm1]
 ok: [vm2]
 
 TASK [mysql_exporter : Create config] ******************************************
-ok: [vm2]
 ok: [vm1]
+ok: [vm2]
 
 TASK [mysql_exporter : Install mysqld exporter] ********************************
 ok: [vm1]
 ok: [vm2]
 
 TASK [mysql_exporter : Verify exporter is running] *****************************
-ok: [vm2]
 ok: [vm1]
+ok: [vm2]
 
 TASK [mysql_exporter : Change slave config] ************************************
 ok: [vm2]
@@ -880,12 +880,12 @@ ok: [vm2]
 ok: [vm1]
 
 TASK [mysql_backup : MySQL user] ***********************************************
-ok: [vm1]
 ok: [vm2]
+ok: [vm1]
 
 TASK [mysql_backup : Make a cronjob] *******************************************
-ok: [vm1]
 ok: [vm2]
+ok: [vm1]
 
 TASK [backup : Add the user "backup" and generate keys] ************************
 ok: [vm1]
@@ -900,8 +900,8 @@ ok: [vm1]
 ok: [vm2]
 
 TASK [backup : Touch a ssh known hosts file] ***********************************
-ok: [vm1]
 ok: [vm2]
+ok: [vm1]
 
 PLAY [Exporters] ***************************************************************
 
@@ -911,13 +911,13 @@ ok: [vm2]
 ok: [vm3]
 
 TASK [nginx : Installing Nginx package] ****************************************
-ok: [vm2]
 ok: [vm1]
+ok: [vm2]
 ok: [vm3]
 
 TASK [nginx : Replace the default Nginx conf file] *****************************
-ok: [vm2]
 ok: [vm1]
+ok: [vm2]
 ok: [vm3]
 
 TASK [nginx : start nginx] *****************************************************
@@ -932,8 +932,8 @@ ok: [vm3]
 
 TASK [nginx_exporter : Verify exporter is running] *****************************
 ok: [vm1]
-ok: [vm3]
 ok: [vm2]
+ok: [vm3]
 
 PLAY [Grafana] *****************************************************************
 
@@ -985,24 +985,24 @@ ok: [vm1]
 ok: [vm2]
 
 TASK [pinger : Add the user "pinger" and generate keys] ************************
-ok: [vm1]
 ok: [vm2]
+ok: [vm1]
 
 TASK [pinger : Copy pinger conf] ***********************************************
 ok: [vm1]
 ok: [vm2]
 
 TASK [pinger : Copy the pinger.sh] *********************************************
-ok: [vm1]
 ok: [vm2]
+ok: [vm1]
 
 TASK [pinger : Create a pinger.service] ****************************************
-ok: [vm2]
 ok: [vm1]
+ok: [vm2]
 
 TASK [pinger : Start & enable the pinger if not started] ***********************
-ok: [vm2]
 ok: [vm1]
+ok: [vm2]
 
 PLAY [influxdb_servers] ********************************************************
 
@@ -1076,19 +1076,19 @@ vm2                        : ok=78   changed=0    unreachable=0    failed=0    s
 vm3                        : ok=67   changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
 
 + ansible all -b -m reboot -a test_command=uptime
+vm3 | CHANGED => {
+    "changed": true,
+    "elapsed": 52,
+    "rebooted": true
+}
 vm2 | CHANGED => {
     "changed": true,
-    "elapsed": 41,
+    "elapsed": 60,
     "rebooted": true
 }
 vm1 | CHANGED => {
     "changed": true,
-    "elapsed": 41,
-    "rebooted": true
-}
-vm3 | CHANGED => {
-    "changed": true,
-    "elapsed": 41,
+    "elapsed": 61,
     "rebooted": true
 }
 + ansible-playbook infra.yaml --diff
@@ -1096,9 +1096,9 @@ vm3 | CHANGED => {
 PLAY [Setup] *******************************************************************
 
 TASK [Gathering Facts] *********************************************************
+ok: [vm1]
 ok: [vm3]
 ok: [vm2]
-ok: [vm1]
 
 TASK [init : Update APT cache] *************************************************
 ok: [vm3]
@@ -1106,9 +1106,9 @@ ok: [vm1]
 ok: [vm2]
 
 TASK [init : hostname] *********************************************************
+ok: [vm3]
 ok: [vm1]
 ok: [vm2]
-ok: [vm3]
 
 TASK [init : Debugging only] ***************************************************
 ok: [vm1] => {
@@ -1123,23 +1123,23 @@ ok: [vm3] => {
 
 TASK [node_exporter : Install APT package] *************************************
 ok: [vm3]
-ok: [vm2]
 ok: [vm1]
+ok: [vm2]
 
 TASK [node_exporter : Enable node exporter] ************************************
-ok: [vm3]
 ok: [vm2]
+ok: [vm3]
 ok: [vm1]
 
 TASK [rsyslog : Install Rsyslog] ***********************************************
-ok: [vm3]
-ok: [vm2]
 ok: [vm1]
+ok: [vm2]
+ok: [vm3]
 
 TASK [rsyslog : config rsyslog] ************************************************
+ok: [vm2]
 ok: [vm3]
 ok: [vm1]
-ok: [vm2]
 
 TASK [rsyslog : start rsyslog] *************************************************
 ok: [vm1]
@@ -1149,19 +1149,19 @@ ok: [vm3]
 PLAY [DNS servers] *************************************************************
 
 TASK [Gathering Facts] *********************************************************
-ok: [vm1]
 ok: [vm3]
 ok: [vm2]
+ok: [vm1]
 
 TASK [bind : Install bind9] ****************************************************
 ok: [vm1]
-ok: [vm2]
 ok: [vm3]
+ok: [vm2]
 
 TASK [bind : Installing the options] *******************************************
+ok: [vm3]
 ok: [vm1]
 ok: [vm2]
-ok: [vm3]
 
 TASK [bind : Installing the db.domain] *****************************************
 skipping: [vm1]
@@ -1179,18 +1179,18 @@ ok: [vm1]
 ok: [vm2]
 
 TASK [bind : Verify bind9 is running] ******************************************
-ok: [vm1]
 ok: [vm3]
+ok: [vm1]
 ok: [vm2]
 
 TASK [bind_exporter : Install bind9 exporter] **********************************
 ok: [vm1]
-ok: [vm3]
 ok: [vm2]
+ok: [vm3]
 
 TASK [bind_exporter : Verify bind9 exporter is running] ************************
-ok: [vm3]
 ok: [vm1]
+ok: [vm3]
 ok: [vm2]
 
 PLAY [DNS records] *************************************************************
@@ -1221,14 +1221,14 @@ ok: [vm3]
 ok: [vm2]
 
 TASK [init : Update APT cache] *************************************************
-ok: [vm2]
 ok: [vm1]
 ok: [vm3]
+ok: [vm2]
 
 TASK [init : hostname] *********************************************************
+ok: [vm1]
 ok: [vm2]
 ok: [vm3]
-ok: [vm1]
 
 TASK [init : Debugging only] ***************************************************
 ok: [vm1] => {
@@ -1243,8 +1243,8 @@ ok: [vm3] => {
 
 TASK [dns_resolve : replace with new resolv file] ******************************
 ok: [vm1]
-ok: [vm3]
 ok: [vm2]
+ok: [vm3]
 
 PLAY [Web server] **************************************************************
 
@@ -1253,8 +1253,8 @@ ok: [vm1]
 ok: [vm2]
 
 TASK [docker : Docker package] *************************************************
-ok: [vm1]
 ok: [vm2]
+ok: [vm1]
 
 TASK [docker : IPtables template] **********************************************
 ok: [vm1]
@@ -1279,20 +1279,20 @@ ok: [vm1]
 ok: [vm2]
 
 TASK [agama : Linux user agama] ************************************************
-ok: [vm2]
 ok: [vm1]
+ok: [vm2]
 
 TASK [agama : Dir for agama] ***************************************************
-ok: [vm2]
 ok: [vm1]
+ok: [vm2]
 
 TASK [agama : Download the app] ************************************************
-ok: [vm2]
 ok: [vm1]
+ok: [vm2]
 
 TASK [agama : Build Agama image] ***********************************************
-ok: [vm1]
 ok: [vm2]
+ok: [vm1]
 
 TASK [agama : Agama container] *************************************************
 ok: [vm2]
@@ -1303,32 +1303,32 @@ ok: [vm1]
 ok: [vm2]
 
 TASK [nginx : Installing Nginx package] ****************************************
-ok: [vm1]
 ok: [vm2]
+ok: [vm1]
 
 TASK [nginx : Replace the default Nginx conf file] *****************************
 ok: [vm1]
 ok: [vm2]
 
 TASK [nginx : start nginx] *****************************************************
-ok: [vm1]
 ok: [vm2]
+ok: [vm1]
 
 TASK [haproxy : Install haproxy] ***********************************************
 ok: [vm1]
 ok: [vm2]
 
 TASK [haproxy : Replace haproxy cfg] *******************************************
-ok: [vm1]
 ok: [vm2]
+ok: [vm1]
 
 TASK [haproxy : Turn on haproxy] ***********************************************
-ok: [vm1]
 ok: [vm2]
+ok: [vm1]
 
 TASK [haproxy_exporter : Install haproxy exporter] *****************************
-ok: [vm1]
 ok: [vm2]
+ok: [vm1]
 
 TASK [haproxy_exporter : Change the default config] ****************************
 ok: [vm1]
@@ -1357,8 +1357,8 @@ ok: [vm2]
 TASK [keepalived : Start "{{ item }}"] *****************************************
 ok: [vm1] => (item=keepalived)
 ok: [vm2] => (item=keepalived)
-ok: [vm1] => (item=keepalived_monitor)
 ok: [vm2] => (item=keepalived_monitor)
+ok: [vm1] => (item=keepalived_monitor)
 
 PLAY [Prometheus] **************************************************************
 
@@ -1389,8 +1389,8 @@ ok: [vm1]
 ok: [vm2]
 
 TASK [mysql : MySQL database for Agama] ****************************************
-ok: [vm2]
 ok: [vm1]
+ok: [vm2]
 
 TASK [mysql : MySQL user for Agama] ********************************************
 ok: [vm2]
@@ -1433,8 +1433,8 @@ ok: [vm2]
 ok: [vm1]
 
 TASK [mysql_backup : MySQL user] ***********************************************
-ok: [vm1]
 ok: [vm2]
+ok: [vm1]
 
 TASK [mysql_backup : Make a cronjob] *******************************************
 ok: [vm1]
@@ -1459,9 +1459,9 @@ ok: [vm2]
 PLAY [Exporters] ***************************************************************
 
 TASK [Gathering Facts] *********************************************************
-ok: [vm1]
-ok: [vm2]
 ok: [vm3]
+ok: [vm2]
+ok: [vm1]
 
 TASK [nginx : Installing Nginx package] ****************************************
 ok: [vm1]
@@ -1480,8 +1480,8 @@ ok: [vm3]
 
 TASK [nginx_exporter : Install nginx-exporter] *********************************
 ok: [vm1]
-ok: [vm3]
 ok: [vm2]
+ok: [vm3]
 
 TASK [nginx_exporter : Verify exporter is running] *****************************
 ok: [vm1]
@@ -1550,8 +1550,8 @@ ok: [vm1]
 ok: [vm2]
 
 TASK [pinger : Create a pinger.service] ****************************************
-ok: [vm2]
 ok: [vm1]
+ok: [vm2]
 
 TASK [pinger : Start & enable the pinger if not started] ***********************
 ok: [vm1]
@@ -1629,4 +1629,4 @@ vm2                        : ok=78   changed=0    unreachable=0    failed=0    s
 vm3                        : ok=67   changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
 
 + date
-Tue Dec 14 23:43:00 EET 2021
+Tue Dec 14 23:52:29 EET 2021
