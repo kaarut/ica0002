@@ -1,7 +1,7 @@
 server {
     listen 80 default_server;
     server_name _;
-    
+    large_client_header_buffers 4 32k;
     # WEB SERVERS 
     {% if inventory_hostname in groups['web_servers'] %}
     
