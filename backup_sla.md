@@ -19,10 +19,11 @@ Backup recovery point objective:
 MySQL and Grafana backups are retained for 4 weeks/28 days, only 2 versions can be stored at the same time.
 
 <h1>Usability checks</h1>
-Usability of the last MySQL and Grafana repository backup is regularly checked every 24 hours before new modifications to Ansible repository and Grafana configuration is done. The test is done on the virtual environment setup, simulating with real infrastructure. 
+Restore the service to the test environment at any time.
+Validate that restored data is shown in the service.
 
-<!-- <h1>Restoration criteria</h1>
-... -->
+<h1>Restoration criteria</h1>
+Restore the service from the backup to the desired state once per week.
 
 <h1>[Backup RTO]</h1>
 
