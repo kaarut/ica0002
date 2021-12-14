@@ -1,4 +1,4 @@
-Wed Dec  8 20:28:05 EET 2021
+Tue Dec 14 18:10:03 EET 2021
 + hostname
 MBP-H8D.local
 + ansible-playbook infra.yaml --diff
@@ -6,9 +6,9 @@ MBP-H8D.local
 PLAY [Setup] *******************************************************************
 
 TASK [Gathering Facts] *********************************************************
+ok: [vm2]
 ok: [vm1]
 ok: [vm3]
-ok: [vm2]
 
 TASK [init : Update APT cache] *************************************************
 ok: [vm2]
@@ -16,34 +16,45 @@ ok: [vm3]
 ok: [vm1]
 
 TASK [init : hostname] *********************************************************
-ok: [vm1]
 ok: [vm2]
 ok: [vm3]
+ok: [vm1]
+
+TASK [init : Debugging only] ***************************************************
+ok: [vm1] => {
+    "msg": "Hello world!"
+}
+ok: [vm2] => {
+    "msg": "Hello world!"
+}
+ok: [vm3] => {
+    "msg": "Hello world!"
+}
 
 TASK [node_exporter : Install APT package] *************************************
 ok: [vm1]
-ok: [vm3]
 ok: [vm2]
+ok: [vm3]
 
 TASK [node_exporter : Enable node exporter] ************************************
-ok: [vm3]
 ok: [vm1]
 ok: [vm2]
+ok: [vm3]
 
 TASK [rsyslog : Install Rsyslog] ***********************************************
+ok: [vm2]
 ok: [vm1]
 ok: [vm3]
-ok: [vm2]
 
 TASK [rsyslog : config rsyslog] ************************************************
-ok: [vm3]
 ok: [vm2]
 ok: [vm1]
+ok: [vm3]
 
 TASK [rsyslog : start rsyslog] *************************************************
-ok: [vm2]
-ok: [vm1]
 ok: [vm3]
+ok: [vm1]
+ok: [vm2]
 
 PLAY [DNS servers] *************************************************************
 
@@ -53,9 +64,9 @@ ok: [vm1]
 ok: [vm2]
 
 TASK [bind : Install bind9] ****************************************************
-ok: [vm3]
 ok: [vm1]
 ok: [vm2]
+ok: [vm3]
 
 TASK [bind : Installing the options] *******************************************
 ok: [vm3]
@@ -77,14 +88,19 @@ ok: [vm3]
 ok: [vm1]
 ok: [vm2]
 
+TASK [bind : Verify bind9 is running] ******************************************
+ok: [vm3]
+ok: [vm2]
+ok: [vm1]
+
 TASK [bind_exporter : Install bind9 exporter] **********************************
 ok: [vm1]
 ok: [vm3]
 ok: [vm2]
 
 TASK [bind_exporter : Verify bind9 exporter is running] ************************
-ok: [vm1]
 ok: [vm3]
+ok: [vm1]
 ok: [vm2]
 
 PLAY [DNS records] *************************************************************
@@ -110,9 +126,9 @@ ok: [vm3] => (item={'key': 'web2', 'value': 'vm2'})
 PLAY [Init] ********************************************************************
 
 TASK [Gathering Facts] *********************************************************
-ok: [vm2]
-ok: [vm1]
 ok: [vm3]
+ok: [vm1]
+ok: [vm2]
 
 TASK [init : Update APT cache] *************************************************
 ok: [vm1]
@@ -121,38 +137,38 @@ ok: [vm3]
 
 TASK [init : hostname] *********************************************************
 ok: [vm1]
-ok: [vm2]
 ok: [vm3]
-
-TASK [backup : Add the user "backup" and generate keys] ************************
-ok: [vm2]
-ok: [vm3]
-ok: [vm1]
-
-TASK [backup : ansible create directory] ***************************************
-ok: [vm3]
-ok: [vm1]
 ok: [vm2]
 
-TASK [backup : Install duplicity] **********************************************
-ok: [vm1]
-ok: [vm2]
-ok: [vm3]
+TASK [init : Debugging only] ***************************************************
+ok: [vm1] => {
+    "msg": "Hello world!"
+}
+ok: [vm2] => {
+    "msg": "Hello world!"
+}
+ok: [vm3] => {
+    "msg": "Hello world!"
+}
 
-TASK [backup : Touch a ssh known hosts file] ***********************************
+TASK [dns_resolve : replace with new resolv file] ******************************
 ok: [vm1]
 ok: [vm2]
 ok: [vm3]
+
+PLAY [Web server] **************************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [vm1]
+ok: [vm2]
 
 TASK [docker : Docker package] *************************************************
 ok: [vm1]
-ok: [vm3]
 ok: [vm2]
 
 TASK [docker : IPtables template] **********************************************
-ok: [vm1]
-ok: [vm3]
 ok: [vm2]
+ok: [vm1]
 
 TASK [docker : Iptables restore] ***********************************************
 [WARNING]: Attempts to restore iptables state without rollback in case of
@@ -165,87 +181,36 @@ mistake may lead the ansible controller to loose access to the hosts and never
 regain it before fixing firewall rules through a serial console, or any other
 way except SSH. Please set task attribute 'poll' (=15) to 0, and 'async' (=0)
 to a value >2 and not greater than 'ansible_timeout' (=10) (recommended).
-[WARNING]: Attempts to restore iptables state without rollback in case of
-mistake may lead the ansible controller to loose access to the hosts and never
-regain it before fixing firewall rules through a serial console, or any other
-way except SSH. Please set task attribute 'poll' (=15) to 0, and 'async' (=0)
-to a value >2 and not greater than 'ansible_timeout' (=10) (recommended).
-ok: [vm3]
 ok: [vm1]
 ok: [vm2]
 
 TASK [docker : Docker service] *************************************************
 ok: [vm1]
-ok: [vm3]
 ok: [vm2]
-
-TASK [dns_resolve : replace with new resolv file] ******************************
-ok: [vm1]
-ok: [vm2]
-ok: [vm3]
-
-TASK [keepalived : Install haproxy & keepalived] *******************************
-ok: [vm1]
-ok: [vm3]
-ok: [vm2]
-
-TASK [keepalived : Replace keepalived conf] ************************************
-ok: [vm1]
-ok: [vm3]
-ok: [vm2]
-
-TASK [keepalived : Add the script] *********************************************
-ok: [vm1]
-ok: [vm3]
-ok: [vm2]
-
-TASK [keepalived : Install keepalived monitoring] ******************************
-ok: [vm3]
-ok: [vm2]
-ok: [vm1]
-
-TASK [keepalived : Create keepalived_monitor] **********************************
-ok: [vm1]
-ok: [vm2]
-ok: [vm3]
-
-TASK [keepalived : Start "{{ item }}"] *****************************************
-ok: [vm1] => (item=keepalived)
-ok: [vm2] => (item=keepalived)
-ok: [vm3] => (item=keepalived)
-ok: [vm1] => (item=keepalived_monitor)
-ok: [vm3] => (item=keepalived_monitor)
-ok: [vm2] => (item=keepalived_monitor)
-
-PLAY [Web server] **************************************************************
-
-TASK [Gathering Facts] *********************************************************
-ok: [vm2]
-ok: [vm1]
 
 TASK [agama : Linux user agama] ************************************************
 ok: [vm2]
 ok: [vm1]
 
 TASK [agama : Dir for agama] ***************************************************
-ok: [vm2]
 ok: [vm1]
+ok: [vm2]
 
 TASK [agama : Download the app] ************************************************
-ok: [vm2]
 ok: [vm1]
+ok: [vm2]
 
 TASK [agama : Build Agama image] ***********************************************
-ok: [vm2]
 ok: [vm1]
+ok: [vm2]
 
 TASK [agama : Agama container] *************************************************
 ok: [vm2]
 ok: [vm1]
 
 TASK [agama : Agama container 2] ***********************************************
-ok: [vm1]
 ok: [vm2]
+ok: [vm1]
 
 TASK [nginx : Installing Nginx package] ****************************************
 ok: [vm1]
@@ -259,7 +224,7 @@ TASK [nginx : start nginx] *****************************************************
 ok: [vm1]
 ok: [vm2]
 
-TASK [haproxy : Install haproxy & keepalived] **********************************
+TASK [haproxy : Install haproxy] ***********************************************
 ok: [vm1]
 ok: [vm2]
 
@@ -267,9 +232,9 @@ TASK [haproxy : Replace haproxy cfg] *******************************************
 ok: [vm1]
 ok: [vm2]
 
-TASK [haproxy : Turn on both services] *****************************************
-ok: [vm1]
+TASK [haproxy : Turn on haproxy] ***********************************************
 ok: [vm2]
+ok: [vm1]
 
 TASK [haproxy_exporter : Install haproxy exporter] *****************************
 ok: [vm1]
@@ -278,6 +243,32 @@ ok: [vm2]
 TASK [haproxy_exporter : Change the default config] ****************************
 ok: [vm2]
 ok: [vm1]
+
+TASK [keepalived : Install keepalived] *****************************************
+ok: [vm1]
+ok: [vm2]
+
+TASK [keepalived : Replace keepalived conf] ************************************
+ok: [vm1]
+ok: [vm2]
+
+TASK [keepalived : Add the script] *********************************************
+ok: [vm2]
+ok: [vm1]
+
+TASK [keepalived : Install keepalived monitoring] ******************************
+ok: [vm2]
+ok: [vm1]
+
+TASK [keepalived : Create keepalived_monitor] **********************************
+ok: [vm1]
+ok: [vm2]
+
+TASK [keepalived : Start "{{ item }}"] *****************************************
+ok: [vm1] => (item=keepalived)
+ok: [vm2] => (item=keepalived)
+ok: [vm1] => (item=keepalived_monitor)
+ok: [vm2] => (item=keepalived_monitor)
 
 PLAY [Prometheus] **************************************************************
 
@@ -300,8 +291,8 @@ ok: [vm1]
 ok: [vm2]
 
 TASK [mysql : Replace the default mysql conf file] *****************************
-ok: [vm1]
 ok: [vm2]
+ok: [vm1]
 
 TASK [mysql : start mysql server] **********************************************
 ok: [vm1]
@@ -316,20 +307,20 @@ ok: [vm2]
 ok: [vm1]
 
 TASK [mysql : MySQL user for replication] **************************************
-ok: [vm1]
 ok: [vm2]
+ok: [vm1]
 
 TASK [mysql : Read only ON/OFF] ************************************************
-ok: [vm1]
 ok: [vm2]
+ok: [vm1]
 
 TASK [mysql_exporter : MySQL user] *********************************************
-ok: [vm1]
 ok: [vm2]
+ok: [vm1]
 
 TASK [mysql_exporter : Create config] ******************************************
-ok: [vm1]
 ok: [vm2]
+ok: [vm1]
 
 TASK [mysql_exporter : Install mysqld exporter] ********************************
 ok: [vm1]
@@ -356,6 +347,22 @@ ok: [vm1]
 ok: [vm2]
 
 TASK [mysql_backup : Make a cronjob] *******************************************
+ok: [vm1]
+ok: [vm2]
+
+TASK [backup : Add the user "backup" and generate keys] ************************
+ok: [vm1]
+ok: [vm2]
+
+TASK [backup : ansible create directory] ***************************************
+ok: [vm1]
+ok: [vm2]
+
+TASK [backup : Install duplicity] **********************************************
+ok: [vm1]
+ok: [vm2]
+
+TASK [backup : Touch a ssh known hosts file] ***********************************
 ok: [vm2]
 ok: [vm1]
 
@@ -363,8 +370,8 @@ PLAY [Exporters] ***************************************************************
 
 TASK [Gathering Facts] *********************************************************
 ok: [vm1]
-ok: [vm3]
 ok: [vm2]
+ok: [vm3]
 
 TASK [nginx : Installing Nginx package] ****************************************
 ok: [vm1]
@@ -372,26 +379,43 @@ ok: [vm3]
 ok: [vm2]
 
 TASK [nginx : Replace the default Nginx conf file] *****************************
-ok: [vm1]
 ok: [vm3]
 ok: [vm2]
+ok: [vm1]
 
 TASK [nginx : start nginx] *****************************************************
-ok: [vm1]
 ok: [vm3]
 ok: [vm2]
+ok: [vm1]
 
 TASK [nginx_exporter : Install nginx-exporter] *********************************
 ok: [vm1]
-ok: [vm3]
 ok: [vm2]
+ok: [vm3]
 
 TASK [nginx_exporter : Verify exporter is running] *****************************
 ok: [vm1]
-ok: [vm3]
 ok: [vm2]
+ok: [vm3]
 
 PLAY [Grafana] *****************************************************************
+
+TASK [docker : Docker package] *************************************************
+ok: [vm3]
+
+TASK [docker : IPtables template] **********************************************
+ok: [vm3]
+
+TASK [docker : Iptables restore] ***********************************************
+[WARNING]: Attempts to restore iptables state without rollback in case of
+mistake may lead the ansible controller to loose access to the hosts and never
+regain it before fixing firewall rules through a serial console, or any other
+way except SSH. Please set task attribute 'poll' (=15) to 0, and 'async' (=0)
+to a value >2 and not greater than 'ansible_timeout' (=10) (recommended).
+ok: [vm3]
+
+TASK [docker : Docker service] *************************************************
+ok: [vm3]
 
 TASK [grafana : Create all Grafana directories] ********************************
 ok: [vm3] => (item=/opt/grafana)
@@ -428,8 +452,8 @@ ok: [vm1]
 ok: [vm2]
 
 TASK [pinger : Copy pinger conf] ***********************************************
-ok: [vm1]
 ok: [vm2]
+ok: [vm1]
 
 TASK [pinger : Copy the pinger.sh] *********************************************
 ok: [vm1]
@@ -488,66 +512,89 @@ ok: [vm3]
 TASK [influxdb_exporter : Start influxdb_exporter] *****************************
 ok: [vm3]
 
+TASK [backup : Add the user "backup" and generate keys] ************************
+ok: [vm3]
+
+TASK [backup : ansible create directory] ***************************************
+ok: [vm3]
+
+TASK [backup : Install duplicity] **********************************************
+ok: [vm3]
+
+TASK [backup : Touch a ssh known hosts file] ***********************************
+ok: [vm3]
+
 PLAY RECAP *********************************************************************
-vm1                        : ok=75   changed=0    unreachable=0    failed=0    skipped=2    rescued=0    ignored=0   
-vm2                        : ok=75   changed=0    unreachable=0    failed=0    skipped=2    rescued=0    ignored=0   
-vm3                        : ok=67   changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+vm1                        : ok=78   changed=0    unreachable=0    failed=0    skipped=2    rescued=0    ignored=0   
+vm2                        : ok=78   changed=0    unreachable=0    failed=0    skipped=2    rescued=0    ignored=0   
+vm3                        : ok=64   changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
 
 + ansible-playbook infra.yaml --diff
 
 PLAY [Setup] *******************************************************************
 
 TASK [Gathering Facts] *********************************************************
-ok: [vm2]
 ok: [vm3]
 ok: [vm1]
+ok: [vm2]
 
 TASK [init : Update APT cache] *************************************************
-ok: [vm3]
 ok: [vm2]
 ok: [vm1]
+ok: [vm3]
 
 TASK [init : hostname] *********************************************************
-ok: [vm1]
 ok: [vm3]
+ok: [vm1]
 ok: [vm2]
+
+TASK [init : Debugging only] ***************************************************
+ok: [vm1] => {
+    "msg": "Hello world!"
+}
+ok: [vm2] => {
+    "msg": "Hello world!"
+}
+ok: [vm3] => {
+    "msg": "Hello world!"
+}
 
 TASK [node_exporter : Install APT package] *************************************
-ok: [vm2]
 ok: [vm3]
 ok: [vm1]
+ok: [vm2]
 
 TASK [node_exporter : Enable node exporter] ************************************
-ok: [vm2]
 ok: [vm3]
+ok: [vm2]
 ok: [vm1]
 
 TASK [rsyslog : Install Rsyslog] ***********************************************
-ok: [vm1]
 ok: [vm2]
+ok: [vm1]
 ok: [vm3]
 
 TASK [rsyslog : config rsyslog] ************************************************
-ok: [vm2]
 ok: [vm3]
+ok: [vm2]
 ok: [vm1]
 
 TASK [rsyslog : start rsyslog] *************************************************
+ok: [vm1]
 ok: [vm3]
 ok: [vm2]
-ok: [vm1]
 
 PLAY [DNS servers] *************************************************************
 
 TASK [Gathering Facts] *********************************************************
 ok: [vm3]
-ok: [vm1]
 ok: [vm2]
+ok: [vm1]
 
 TASK [bind : Install bind9] ****************************************************
-ok: [vm3]
 ok: [vm1]
 ok: [vm2]
+ok: [vm3]
 
 TASK [bind : Installing the options] *******************************************
 ok: [vm3]
@@ -565,14 +612,19 @@ skipping: [vm2]
 ok: [vm3]
 
 TASK [bind : Installing the local] *********************************************
-ok: [vm1]
 ok: [vm3]
+ok: [vm1]
+ok: [vm2]
+
+TASK [bind : Verify bind9 is running] ******************************************
+ok: [vm3]
+ok: [vm1]
 ok: [vm2]
 
 TASK [bind_exporter : Install bind9 exporter] **********************************
 ok: [vm3]
-ok: [vm2]
 ok: [vm1]
+ok: [vm2]
 
 TASK [bind_exporter : Verify bind9 exporter is running] ************************
 ok: [vm3]
@@ -602,48 +654,48 @@ ok: [vm3] => (item={'key': 'web2', 'value': 'vm2'})
 PLAY [Init] ********************************************************************
 
 TASK [Gathering Facts] *********************************************************
-ok: [vm2]
-ok: [vm3]
 ok: [vm1]
+ok: [vm3]
+ok: [vm2]
 
 TASK [init : Update APT cache] *************************************************
 ok: [vm1]
-ok: [vm2]
 ok: [vm3]
+ok: [vm2]
 
 TASK [init : hostname] *********************************************************
 ok: [vm1]
-ok: [vm3]
 ok: [vm2]
-
-TASK [backup : Add the user "backup" and generate keys] ************************
 ok: [vm3]
+
+TASK [init : Debugging only] ***************************************************
+ok: [vm1] => {
+    "msg": "Hello world!"
+}
+ok: [vm2] => {
+    "msg": "Hello world!"
+}
+ok: [vm3] => {
+    "msg": "Hello world!"
+}
+
+TASK [dns_resolve : replace with new resolv file] ******************************
 ok: [vm1]
 ok: [vm2]
-
-TASK [backup : ansible create directory] ***************************************
-ok: [vm1]
 ok: [vm3]
-ok: [vm2]
 
-TASK [backup : Install duplicity] **********************************************
-ok: [vm1]
-ok: [vm3]
-ok: [vm2]
+PLAY [Web server] **************************************************************
 
-TASK [backup : Touch a ssh known hosts file] ***********************************
+TASK [Gathering Facts] *********************************************************
 ok: [vm1]
-ok: [vm3]
 ok: [vm2]
 
 TASK [docker : Docker package] *************************************************
 ok: [vm1]
 ok: [vm2]
-ok: [vm3]
 
 TASK [docker : IPtables template] **********************************************
 ok: [vm1]
-ok: [vm3]
 ok: [vm2]
 
 TASK [docker : Iptables restore] ***********************************************
@@ -657,71 +709,20 @@ mistake may lead the ansible controller to loose access to the hosts and never
 regain it before fixing firewall rules through a serial console, or any other
 way except SSH. Please set task attribute 'poll' (=15) to 0, and 'async' (=0)
 to a value >2 and not greater than 'ansible_timeout' (=10) (recommended).
-[WARNING]: Attempts to restore iptables state without rollback in case of
-mistake may lead the ansible controller to loose access to the hosts and never
-regain it before fixing firewall rules through a serial console, or any other
-way except SSH. Please set task attribute 'poll' (=15) to 0, and 'async' (=0)
-to a value >2 and not greater than 'ansible_timeout' (=10) (recommended).
 ok: [vm1]
-ok: [vm3]
 ok: [vm2]
 
 TASK [docker : Docker service] *************************************************
 ok: [vm1]
-ok: [vm3]
-ok: [vm2]
-
-TASK [dns_resolve : replace with new resolv file] ******************************
-ok: [vm1]
-ok: [vm3]
-ok: [vm2]
-
-TASK [keepalived : Install haproxy & keepalived] *******************************
-ok: [vm1]
-ok: [vm2]
-ok: [vm3]
-
-TASK [keepalived : Replace keepalived conf] ************************************
-ok: [vm1]
-ok: [vm3]
-ok: [vm2]
-
-TASK [keepalived : Add the script] *********************************************
-ok: [vm1]
-ok: [vm2]
-ok: [vm3]
-
-TASK [keepalived : Install keepalived monitoring] ******************************
-ok: [vm3]
-ok: [vm1]
-ok: [vm2]
-
-TASK [keepalived : Create keepalived_monitor] **********************************
-ok: [vm1]
-ok: [vm3]
-ok: [vm2]
-
-TASK [keepalived : Start "{{ item }}"] *****************************************
-ok: [vm1] => (item=keepalived)
-ok: [vm2] => (item=keepalived)
-ok: [vm3] => (item=keepalived)
-ok: [vm1] => (item=keepalived_monitor)
-ok: [vm2] => (item=keepalived_monitor)
-ok: [vm3] => (item=keepalived_monitor)
-
-PLAY [Web server] **************************************************************
-
-TASK [Gathering Facts] *********************************************************
-ok: [vm1]
 ok: [vm2]
 
 TASK [agama : Linux user agama] ************************************************
-ok: [vm1]
 ok: [vm2]
+ok: [vm1]
 
 TASK [agama : Dir for agama] ***************************************************
-ok: [vm2]
 ok: [vm1]
+ok: [vm2]
 
 TASK [agama : Download the app] ************************************************
 ok: [vm1]
@@ -740,18 +741,18 @@ ok: [vm1]
 ok: [vm2]
 
 TASK [nginx : Installing Nginx package] ****************************************
-ok: [vm1]
 ok: [vm2]
+ok: [vm1]
 
 TASK [nginx : Replace the default Nginx conf file] *****************************
-ok: [vm1]
 ok: [vm2]
+ok: [vm1]
 
 TASK [nginx : start nginx] *****************************************************
 ok: [vm1]
 ok: [vm2]
 
-TASK [haproxy : Install haproxy & keepalived] **********************************
+TASK [haproxy : Install haproxy] ***********************************************
 ok: [vm2]
 ok: [vm1]
 
@@ -759,17 +760,43 @@ TASK [haproxy : Replace haproxy cfg] *******************************************
 ok: [vm1]
 ok: [vm2]
 
-TASK [haproxy : Turn on both services] *****************************************
+TASK [haproxy : Turn on haproxy] ***********************************************
 ok: [vm1]
 ok: [vm2]
 
 TASK [haproxy_exporter : Install haproxy exporter] *****************************
-ok: [vm2]
 ok: [vm1]
+ok: [vm2]
 
 TASK [haproxy_exporter : Change the default config] ****************************
 ok: [vm1]
 ok: [vm2]
+
+TASK [keepalived : Install keepalived] *****************************************
+ok: [vm1]
+ok: [vm2]
+
+TASK [keepalived : Replace keepalived conf] ************************************
+ok: [vm2]
+ok: [vm1]
+
+TASK [keepalived : Add the script] *********************************************
+ok: [vm1]
+ok: [vm2]
+
+TASK [keepalived : Install keepalived monitoring] ******************************
+ok: [vm1]
+ok: [vm2]
+
+TASK [keepalived : Create keepalived_monitor] **********************************
+ok: [vm2]
+ok: [vm1]
+
+TASK [keepalived : Start "{{ item }}"] *****************************************
+ok: [vm1] => (item=keepalived)
+ok: [vm2] => (item=keepalived)
+ok: [vm2] => (item=keepalived_monitor)
+ok: [vm1] => (item=keepalived_monitor)
 
 PLAY [Prometheus] **************************************************************
 
@@ -788,8 +815,8 @@ ok: [vm3]
 PLAY [MYSQL servers] ***********************************************************
 
 TASK [mysql : Install MYSQL-server] ********************************************
-ok: [vm1]
 ok: [vm2]
+ok: [vm1]
 
 TASK [mysql : Replace the default mysql conf file] *****************************
 ok: [vm1]
@@ -800,20 +827,20 @@ ok: [vm1]
 ok: [vm2]
 
 TASK [mysql : MySQL database for Agama] ****************************************
-ok: [vm2]
 ok: [vm1]
+ok: [vm2]
 
 TASK [mysql : MySQL user for Agama] ********************************************
-ok: [vm2]
 ok: [vm1]
+ok: [vm2]
 
 TASK [mysql : MySQL user for replication] **************************************
-ok: [vm2]
 ok: [vm1]
+ok: [vm2]
 
 TASK [mysql : Read only ON/OFF] ************************************************
-ok: [vm2]
 ok: [vm1]
+ok: [vm2]
 
 TASK [mysql_exporter : MySQL user] *********************************************
 ok: [vm1]
@@ -828,8 +855,8 @@ ok: [vm1]
 ok: [vm2]
 
 TASK [mysql_exporter : Verify exporter is running] *****************************
-ok: [vm2]
 ok: [vm1]
+ok: [vm2]
 
 TASK [mysql_exporter : Change slave config] ************************************
 ok: [vm1]
@@ -848,25 +875,41 @@ ok: [vm1]
 ok: [vm2]
 
 TASK [mysql_backup : Make a cronjob] *******************************************
+ok: [vm2]
+ok: [vm1]
+
+TASK [backup : Add the user "backup" and generate keys] ************************
+ok: [vm1]
+ok: [vm2]
+
+TASK [backup : ansible create directory] ***************************************
+ok: [vm1]
+ok: [vm2]
+
+TASK [backup : Install duplicity] **********************************************
+ok: [vm1]
+ok: [vm2]
+
+TASK [backup : Touch a ssh known hosts file] ***********************************
 ok: [vm1]
 ok: [vm2]
 
 PLAY [Exporters] ***************************************************************
 
 TASK [Gathering Facts] *********************************************************
+ok: [vm1]
 ok: [vm2]
 ok: [vm3]
-ok: [vm1]
 
 TASK [nginx : Installing Nginx package] ****************************************
 ok: [vm1]
-ok: [vm3]
 ok: [vm2]
+ok: [vm3]
 
 TASK [nginx : Replace the default Nginx conf file] *****************************
-ok: [vm2]
 ok: [vm1]
 ok: [vm3]
+ok: [vm2]
 
 TASK [nginx : start nginx] *****************************************************
 ok: [vm1]
@@ -874,9 +917,9 @@ ok: [vm2]
 ok: [vm3]
 
 TASK [nginx_exporter : Install nginx-exporter] *********************************
+ok: [vm3]
 ok: [vm1]
 ok: [vm2]
-ok: [vm3]
 
 TASK [nginx_exporter : Verify exporter is running] *****************************
 ok: [vm1]
@@ -884,6 +927,23 @@ ok: [vm2]
 ok: [vm3]
 
 PLAY [Grafana] *****************************************************************
+
+TASK [docker : Docker package] *************************************************
+ok: [vm3]
+
+TASK [docker : IPtables template] **********************************************
+ok: [vm3]
+
+TASK [docker : Iptables restore] ***********************************************
+[WARNING]: Attempts to restore iptables state without rollback in case of
+mistake may lead the ansible controller to loose access to the hosts and never
+regain it before fixing firewall rules through a serial console, or any other
+way except SSH. Please set task attribute 'poll' (=15) to 0, and 'async' (=0)
+to a value >2 and not greater than 'ansible_timeout' (=10) (recommended).
+ok: [vm3]
+
+TASK [docker : Docker service] *************************************************
+ok: [vm3]
 
 TASK [grafana : Create all Grafana directories] ********************************
 ok: [vm3] => (item=/opt/grafana)
@@ -916,16 +976,16 @@ ok: [vm1]
 ok: [vm2]
 
 TASK [pinger : Add the user "pinger" and generate keys] ************************
-ok: [vm1]
 ok: [vm2]
+ok: [vm1]
 
 TASK [pinger : Copy pinger conf] ***********************************************
 ok: [vm1]
 ok: [vm2]
 
 TASK [pinger : Copy the pinger.sh] *********************************************
-ok: [vm1]
 ok: [vm2]
+ok: [vm1]
 
 TASK [pinger : Create a pinger.service] ****************************************
 ok: [vm1]
@@ -980,25 +1040,37 @@ ok: [vm3]
 TASK [influxdb_exporter : Start influxdb_exporter] *****************************
 ok: [vm3]
 
+TASK [backup : Add the user "backup" and generate keys] ************************
+ok: [vm3]
+
+TASK [backup : ansible create directory] ***************************************
+ok: [vm3]
+
+TASK [backup : Install duplicity] **********************************************
+ok: [vm3]
+
+TASK [backup : Touch a ssh known hosts file] ***********************************
+ok: [vm3]
+
 PLAY RECAP *********************************************************************
-vm1                        : ok=75   changed=0    unreachable=0    failed=0    skipped=2    rescued=0    ignored=0   
-vm2                        : ok=75   changed=0    unreachable=0    failed=0    skipped=2    rescued=0    ignored=0   
-vm3                        : ok=67   changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+vm1                        : ok=78   changed=0    unreachable=0    failed=0    skipped=2    rescued=0    ignored=0   
+vm2                        : ok=78   changed=0    unreachable=0    failed=0    skipped=2    rescued=0    ignored=0   
+vm3                        : ok=64   changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
 
 + ansible all -b -m reboot -a test_command=uptime
 vm3 | CHANGED => {
     "changed": true,
-    "elapsed": 30,
+    "elapsed": 36,
     "rebooted": true
 }
 vm2 | CHANGED => {
     "changed": true,
-    "elapsed": 38,
+    "elapsed": 41,
     "rebooted": true
 }
 vm1 | CHANGED => {
     "changed": true,
-    "elapsed": 39,
+    "elapsed": 41,
     "rebooted": true
 }
 + ansible-playbook infra.yaml --diff
@@ -1006,8 +1078,8 @@ vm1 | CHANGED => {
 PLAY [Setup] *******************************************************************
 
 TASK [Gathering Facts] *********************************************************
-ok: [vm1]
 ok: [vm3]
+ok: [vm1]
 ok: [vm2]
 
 TASK [init : Update APT cache] *************************************************
@@ -1020,6 +1092,17 @@ ok: [vm3]
 ok: [vm1]
 ok: [vm2]
 
+TASK [init : Debugging only] ***************************************************
+ok: [vm1] => {
+    "msg": "Hello world!"
+}
+ok: [vm2] => {
+    "msg": "Hello world!"
+}
+ok: [vm3] => {
+    "msg": "Hello world!"
+}
+
 TASK [node_exporter : Install APT package] *************************************
 ok: [vm1]
 ok: [vm3]
@@ -1027,18 +1110,18 @@ ok: [vm2]
 
 TASK [node_exporter : Enable node exporter] ************************************
 ok: [vm2]
-ok: [vm3]
 ok: [vm1]
+ok: [vm3]
 
 TASK [rsyslog : Install Rsyslog] ***********************************************
-ok: [vm3]
 ok: [vm1]
 ok: [vm2]
+ok: [vm3]
 
 TASK [rsyslog : config rsyslog] ************************************************
-ok: [vm3]
 ok: [vm2]
 ok: [vm1]
+ok: [vm3]
 
 TASK [rsyslog : start rsyslog] *************************************************
 ok: [vm2]
@@ -1054,8 +1137,8 @@ ok: [vm2]
 
 TASK [bind : Install bind9] ****************************************************
 ok: [vm3]
-ok: [vm1]
 ok: [vm2]
+ok: [vm1]
 
 TASK [bind : Installing the options] *******************************************
 ok: [vm3]
@@ -1077,15 +1160,20 @@ ok: [vm3]
 ok: [vm1]
 ok: [vm2]
 
-TASK [bind_exporter : Install bind9 exporter] **********************************
+TASK [bind : Verify bind9 is running] ******************************************
 ok: [vm3]
+ok: [vm2]
+ok: [vm1]
+
+TASK [bind_exporter : Install bind9 exporter] **********************************
 ok: [vm1]
 ok: [vm2]
+ok: [vm3]
 
 TASK [bind_exporter : Verify bind9 exporter is running] ************************
+ok: [vm1]
 ok: [vm3]
 ok: [vm2]
-ok: [vm1]
 
 PLAY [DNS records] *************************************************************
 
@@ -1111,8 +1199,8 @@ PLAY [Init] ********************************************************************
 
 TASK [Gathering Facts] *********************************************************
 ok: [vm1]
-ok: [vm3]
 ok: [vm2]
+ok: [vm3]
 
 TASK [init : Update APT cache] *************************************************
 ok: [vm1]
@@ -1121,38 +1209,38 @@ ok: [vm2]
 
 TASK [init : hostname] *********************************************************
 ok: [vm1]
-ok: [vm3]
 ok: [vm2]
+ok: [vm3]
 
-TASK [backup : Add the user "backup" and generate keys] ************************
+TASK [init : Debugging only] ***************************************************
+ok: [vm1] => {
+    "msg": "Hello world!"
+}
+ok: [vm2] => {
+    "msg": "Hello world!"
+}
+ok: [vm3] => {
+    "msg": "Hello world!"
+}
+
+TASK [dns_resolve : replace with new resolv file] ******************************
 ok: [vm2]
 ok: [vm3]
 ok: [vm1]
 
-TASK [backup : ansible create directory] ***************************************
-ok: [vm3]
-ok: [vm1]
-ok: [vm2]
+PLAY [Web server] **************************************************************
 
-TASK [backup : Install duplicity] **********************************************
+TASK [Gathering Facts] *********************************************************
 ok: [vm1]
 ok: [vm2]
-ok: [vm3]
-
-TASK [backup : Touch a ssh known hosts file] ***********************************
-ok: [vm1]
-ok: [vm2]
-ok: [vm3]
 
 TASK [docker : Docker package] *************************************************
 ok: [vm1]
-ok: [vm3]
 ok: [vm2]
 
 TASK [docker : IPtables template] **********************************************
 ok: [vm1]
 ok: [vm2]
-ok: [vm3]
 
 TASK [docker : Iptables restore] ***********************************************
 [WARNING]: Attempts to restore iptables state without rollback in case of
@@ -1165,71 +1253,20 @@ mistake may lead the ansible controller to loose access to the hosts and never
 regain it before fixing firewall rules through a serial console, or any other
 way except SSH. Please set task attribute 'poll' (=15) to 0, and 'async' (=0)
 to a value >2 and not greater than 'ansible_timeout' (=10) (recommended).
-[WARNING]: Attempts to restore iptables state without rollback in case of
-mistake may lead the ansible controller to loose access to the hosts and never
-regain it before fixing firewall rules through a serial console, or any other
-way except SSH. Please set task attribute 'poll' (=15) to 0, and 'async' (=0)
-to a value >2 and not greater than 'ansible_timeout' (=10) (recommended).
 ok: [vm1]
-ok: [vm3]
 ok: [vm2]
 
 TASK [docker : Docker service] *************************************************
 ok: [vm1]
-ok: [vm3]
 ok: [vm2]
-
-TASK [dns_resolve : replace with new resolv file] ******************************
-ok: [vm1]
-ok: [vm2]
-ok: [vm3]
-
-TASK [keepalived : Install haproxy & keepalived] *******************************
-ok: [vm1]
-ok: [vm2]
-ok: [vm3]
-
-TASK [keepalived : Replace keepalived conf] ************************************
-ok: [vm1]
-ok: [vm2]
-ok: [vm3]
-
-TASK [keepalived : Add the script] *********************************************
-ok: [vm1]
-ok: [vm3]
-ok: [vm2]
-
-TASK [keepalived : Install keepalived monitoring] ******************************
-ok: [vm2]
-ok: [vm3]
-ok: [vm1]
-
-TASK [keepalived : Create keepalived_monitor] **********************************
-ok: [vm2]
-ok: [vm3]
-ok: [vm1]
-
-TASK [keepalived : Start "{{ item }}"] *****************************************
-ok: [vm3] => (item=keepalived)
-ok: [vm2] => (item=keepalived)
-ok: [vm1] => (item=keepalived)
-ok: [vm2] => (item=keepalived_monitor)
-ok: [vm1] => (item=keepalived_monitor)
-ok: [vm3] => (item=keepalived_monitor)
-
-PLAY [Web server] **************************************************************
-
-TASK [Gathering Facts] *********************************************************
-ok: [vm2]
-ok: [vm1]
 
 TASK [agama : Linux user agama] ************************************************
-ok: [vm2]
 ok: [vm1]
+ok: [vm2]
 
 TASK [agama : Dir for agama] ***************************************************
-ok: [vm1]
 ok: [vm2]
+ok: [vm1]
 
 TASK [agama : Download the app] ************************************************
 ok: [vm2]
@@ -1244,8 +1281,8 @@ ok: [vm2]
 ok: [vm1]
 
 TASK [agama : Agama container 2] ***********************************************
-ok: [vm2]
 ok: [vm1]
+ok: [vm2]
 
 TASK [nginx : Installing Nginx package] ****************************************
 ok: [vm1]
@@ -1259,15 +1296,15 @@ TASK [nginx : start nginx] *****************************************************
 ok: [vm1]
 ok: [vm2]
 
-TASK [haproxy : Install haproxy & keepalived] **********************************
+TASK [haproxy : Install haproxy] ***********************************************
 ok: [vm1]
 ok: [vm2]
 
 TASK [haproxy : Replace haproxy cfg] *******************************************
-ok: [vm2]
 ok: [vm1]
+ok: [vm2]
 
-TASK [haproxy : Turn on both services] *****************************************
+TASK [haproxy : Turn on haproxy] ***********************************************
 ok: [vm1]
 ok: [vm2]
 
@@ -1278,6 +1315,32 @@ ok: [vm2]
 TASK [haproxy_exporter : Change the default config] ****************************
 ok: [vm1]
 ok: [vm2]
+
+TASK [keepalived : Install keepalived] *****************************************
+ok: [vm1]
+ok: [vm2]
+
+TASK [keepalived : Replace keepalived conf] ************************************
+ok: [vm1]
+ok: [vm2]
+
+TASK [keepalived : Add the script] *********************************************
+ok: [vm1]
+ok: [vm2]
+
+TASK [keepalived : Install keepalived monitoring] ******************************
+ok: [vm1]
+ok: [vm2]
+
+TASK [keepalived : Create keepalived_monitor] **********************************
+ok: [vm1]
+ok: [vm2]
+
+TASK [keepalived : Start "{{ item }}"] *****************************************
+ok: [vm2] => (item=keepalived)
+ok: [vm1] => (item=keepalived)
+ok: [vm2] => (item=keepalived_monitor)
+ok: [vm1] => (item=keepalived_monitor)
 
 PLAY [Prometheus] **************************************************************
 
@@ -1308,8 +1371,8 @@ ok: [vm1]
 ok: [vm2]
 
 TASK [mysql : MySQL database for Agama] ****************************************
-ok: [vm2]
 ok: [vm1]
+ok: [vm2]
 
 TASK [mysql : MySQL user for Agama] ********************************************
 ok: [vm1]
@@ -1320,24 +1383,24 @@ ok: [vm1]
 ok: [vm2]
 
 TASK [mysql : Read only ON/OFF] ************************************************
-ok: [vm1]
 ok: [vm2]
+ok: [vm1]
 
 TASK [mysql_exporter : MySQL user] *********************************************
 ok: [vm1]
 ok: [vm2]
 
 TASK [mysql_exporter : Create config] ******************************************
-ok: [vm1]
 ok: [vm2]
+ok: [vm1]
 
 TASK [mysql_exporter : Install mysqld exporter] ********************************
-ok: [vm1]
 ok: [vm2]
+ok: [vm1]
 
 TASK [mysql_exporter : Verify exporter is running] *****************************
-ok: [vm2]
 ok: [vm1]
+ok: [vm2]
 
 TASK [mysql_exporter : Change slave config] ************************************
 ok: [vm1]
@@ -1348,8 +1411,8 @@ ok: [vm1]
 ok: [vm2]
 
 TASK [mysql_backup : Replace mysql conf file] **********************************
-ok: [vm1]
 ok: [vm2]
+ok: [vm1]
 
 TASK [mysql_backup : MySQL user] ***********************************************
 ok: [vm1]
@@ -1359,39 +1422,72 @@ TASK [mysql_backup : Make a cronjob] *******************************************
 ok: [vm1]
 ok: [vm2]
 
+TASK [backup : Add the user "backup" and generate keys] ************************
+ok: [vm1]
+ok: [vm2]
+
+TASK [backup : ansible create directory] ***************************************
+ok: [vm1]
+ok: [vm2]
+
+TASK [backup : Install duplicity] **********************************************
+ok: [vm1]
+ok: [vm2]
+
+TASK [backup : Touch a ssh known hosts file] ***********************************
+ok: [vm1]
+ok: [vm2]
+
 PLAY [Exporters] ***************************************************************
 
 TASK [Gathering Facts] *********************************************************
-ok: [vm3]
 ok: [vm1]
 ok: [vm2]
+ok: [vm3]
 
 TASK [nginx : Installing Nginx package] ****************************************
+ok: [vm2]
 ok: [vm1]
 ok: [vm3]
-ok: [vm2]
 
 TASK [nginx : Replace the default Nginx conf file] *****************************
 ok: [vm1]
-ok: [vm3]
 ok: [vm2]
+ok: [vm3]
 
 TASK [nginx : start nginx] *****************************************************
-ok: [vm2]
 ok: [vm1]
+ok: [vm2]
 ok: [vm3]
 
 TASK [nginx_exporter : Install nginx-exporter] *********************************
+ok: [vm1]
 ok: [vm2]
 ok: [vm3]
-ok: [vm1]
 
 TASK [nginx_exporter : Verify exporter is running] *****************************
+ok: [vm2]
 ok: [vm1]
 ok: [vm3]
-ok: [vm2]
 
 PLAY [Grafana] *****************************************************************
+
+TASK [docker : Docker package] *************************************************
+ok: [vm3]
+
+TASK [docker : IPtables template] **********************************************
+ok: [vm3]
+
+TASK [docker : Iptables restore] ***********************************************
+[WARNING]: Attempts to restore iptables state without rollback in case of
+mistake may lead the ansible controller to loose access to the hosts and never
+regain it before fixing firewall rules through a serial console, or any other
+way except SSH. Please set task attribute 'poll' (=15) to 0, and 'async' (=0)
+to a value >2 and not greater than 'ansible_timeout' (=10) (recommended).
+ok: [vm3]
+
+TASK [docker : Docker service] *************************************************
+ok: [vm3]
 
 TASK [grafana : Create all Grafana directories] ********************************
 ok: [vm3] => (item=/opt/grafana)
@@ -1440,8 +1536,8 @@ ok: [vm1]
 ok: [vm2]
 
 TASK [pinger : Start & enable the pinger if not started] ***********************
-ok: [vm2]
 ok: [vm1]
+ok: [vm2]
 
 PLAY [influxdb_servers] ********************************************************
 
@@ -1488,10 +1584,22 @@ ok: [vm3]
 TASK [influxdb_exporter : Start influxdb_exporter] *****************************
 ok: [vm3]
 
+TASK [backup : Add the user "backup" and generate keys] ************************
+ok: [vm3]
+
+TASK [backup : ansible create directory] ***************************************
+ok: [vm3]
+
+TASK [backup : Install duplicity] **********************************************
+ok: [vm3]
+
+TASK [backup : Touch a ssh known hosts file] ***********************************
+ok: [vm3]
+
 PLAY RECAP *********************************************************************
-vm1                        : ok=75   changed=0    unreachable=0    failed=0    skipped=2    rescued=0    ignored=0   
-vm2                        : ok=75   changed=0    unreachable=0    failed=0    skipped=2    rescued=0    ignored=0   
-vm3                        : ok=67   changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+vm1                        : ok=78   changed=0    unreachable=0    failed=0    skipped=2    rescued=0    ignored=0   
+vm2                        : ok=78   changed=0    unreachable=0    failed=0    skipped=2    rescued=0    ignored=0   
+vm3                        : ok=64   changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
 
 + date
-Wed Dec  8 20:34:21 EET 2021
+Tue Dec 14 18:19:17 EET 2021

@@ -33,3 +33,9 @@
     src: named.conf.local.j2
     dest: /etc/bind/named.conf.local
   notify: restart bind
+
+- name: Verify bind9 is running
+  service:
+    name: bind9
+    state: started 
+    enabled: true 
