@@ -5,7 +5,6 @@
     name: 
     - fping 
     - curl
-    state: latest
 
 - name: Add the user "pinger" and generate keys
   user:
@@ -17,11 +16,11 @@
   template: 
     src: pinger.conf.j2
     dest: /etc/pinger/pinger.conf
-  notify: daemon-reload
+  notify: restart pinger
 
 - name: Copy the pinger.sh
   copy:
-    src: ../files/pinger.sh
+    src: pinger.sh
     dest: /usr/local/bin/pinger
     mode: 0777
   notify: restart pinger

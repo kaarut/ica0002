@@ -11,10 +11,6 @@
     value: "{{ item.value }}"
   loop: "{{ dns_a_records | dict2items }}"
   run_once: True
-  notify:
-  - restart bind
-  - reload rndc
-
 
 - name: Set CNAME records
   nsupdate:
@@ -28,6 +24,3 @@
     value: "{{ item.value }}"
   loop: "{{ dns_cname_records | dict2items }}"
   run_once: True
-  notify: 
-  - restart bind
-  - reload rndc

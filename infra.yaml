@@ -21,6 +21,7 @@
     hosts: dns_master
     roles: 
       - dns_records
+    tags: dr
 
   - name: Init
     hosts: all
@@ -91,7 +92,6 @@
     hosts: influxdb_servers
     become: yes
     roles:
-      - rsyslog
       - influxdb
       - influxdb_backup
       - influxdb_exporter
