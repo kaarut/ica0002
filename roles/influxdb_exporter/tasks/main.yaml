@@ -24,4 +24,4 @@
   service:
     name: influxdb_exporter
     state: started
-    enabled: true
+    enabled: yes

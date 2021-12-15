@@ -11,7 +11,7 @@
     value: "{{ item.value }}"
   loop: "{{ dns_a_records | dict2items }}"
   run_once: True
-  notify: 
+  notify:
   - restart bind
   - reload rndc
 

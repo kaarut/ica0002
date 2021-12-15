@@ -135,6 +135,7 @@ prometheus_jobs:
 #DNS
 dns_a_records:
   backup: 192.168.42.156
+  google: 8.8.8.8
 
 dns_cname_records:
   grafana: "{{ groups['grafana_servers'][0] }}"

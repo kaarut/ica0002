@@ -27,11 +27,14 @@
     dest: /etc/telegraf/telegraf.conf
   notify: telegraf restart
 
-- name: Verify apps are running
+- name: start influxdb server
   service:
-    name: "{{ item }}"
-    state: started 
-    enabled: true 
-  loop:
-    - influxdb
-    - telegraf
+    name: influxdb
+    state: started
+    enabled: yes
+
+- name: start telegraf server
+  service:
+    name: telegraf
+    state: started
+    enabled: yes

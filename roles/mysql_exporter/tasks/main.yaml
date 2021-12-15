@@ -22,7 +22,7 @@
   service:
     name: prometheus-mysqld-exporter
     state: started
-    enabled: true 
+    enabled: yes 
 
 - name: Change slave config 
   ansible.builtin.copy:

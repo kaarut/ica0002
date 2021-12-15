@@ -19,7 +19,6 @@
     state: started
     enabled: yes
     
-    
 # - name: Restart after config change
 #   ansible.builtin.template:
 #     src: ./agama.ini
