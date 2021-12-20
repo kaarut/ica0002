@@ -28,7 +28,7 @@ listen agama
     bind :88
     stats enable
     stats uri /stats
-	server docker1 	vm1:8001 check
-	server docker2 	vm1:8002 check
-	server docker3 	vm2:8001 check
-	server docker4 	vm2:8002 check
+	server docker1 	vm1:{{ agama_port + 1}} check
+	server docker2 	vm1:{{ agama_port + 2}} check
+	server docker3 	vm2:{{ agama_port + 1}} check
+	server docker4 	vm2:{{ agama_port + 2}} check
